@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "package": "com.winterclient.mixins.implementations",
+  "refmap": "mixins.winterclient.json",
+  "verbose": true,
+  "mixins": [
+    "MixinMinecraft",
+    "MixinGuiMainMenu",
+    "MixinScaledResolution"
+  ]
+}
