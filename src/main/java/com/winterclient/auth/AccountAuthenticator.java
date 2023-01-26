@@ -14,6 +14,7 @@ import java.util.*;
 
 public class AccountAuthenticator {
 
+    public boolean success=false;
     String saveAccessToken;
     public String saveRefreshToken;
     String saveXboxToken;
@@ -22,6 +23,7 @@ public class AccountAuthenticator {
     public String saveMinecraftToken;
     public String saveUUID;
     public String saveName;
+    public Long saveExpiration;
 
     //get MICROSOFT TOKEN
 
@@ -49,13 +51,10 @@ public class AccountAuthenticator {
             JSONObject data = response.getBody().getObject();
             String accessToken = data.getString("access_token");
             String refresh_token = data.getString("refresh_token");
-            saveRefreshToken=refresh_token;
+            saveRefreshToken = refresh_token;
             getXboxLiveToken(accessToken);
         } else {
-            JSONObject data = response.getBody().getObject();
-            String error = data.getString("error");
-            String description = data.getString("error_description");
-            System.out.println("Error: " + error + " Reason: " + description);
+            System.out.println("Error: INVALID TOKEN");
         }
     }
 
@@ -77,7 +76,7 @@ public class AccountAuthenticator {
             JSONObject data = response.getBody().getObject();
             String accessToken = data.getString("access_token");
             String refresh_token = data.getString("refresh_token");
-            saveRefreshToken=refresh_token;
+            saveRefreshToken = refresh_token;
             getXboxLiveToken(accessToken);
         } else {
             JSONObject data = response.getBody().getObject();
@@ -165,6 +164,10 @@ public class AccountAuthenticator {
     //Get Minecraft Token
     public void getMinecraftToken(String uhs, String XSTSToken) {
 
+        Date date = new Date();
+        long expiration = date.getTime() + 86400000L;
+        saveExpiration=expiration;
+
         String link = "https://api.minecraftservices.com/authentication/login_with_xbox";
 
         Map<Object, Object> info = ImmutableMap.of(
@@ -184,7 +187,7 @@ public class AccountAuthenticator {
             System.out.println("Success (MinecraftToken): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String token = data.getString("access_token");
-            saveMinecraftToken=token;
+            saveMinecraftToken = token;
             checkAccount(token);
         } else {
             System.out.println("Error: Couldn't get Minecraft token!");
@@ -208,9 +211,9 @@ public class AccountAuthenticator {
     }
 
     //GET PROFILE INFORMATION
-    public void getProfile(String minecraftToken){
+    public void getProfile(String minecraftToken) {
 
-        String link ="https://api.minecraftservices.com/minecraft/profile";
+        String link = "https://api.minecraftservices.com/minecraft/profile";
 
         HttpResponse<JsonNode> response = Unirest.get(link)
                 .header("Authorization", "Bearer " + minecraftToken)
@@ -221,23 +224,13 @@ public class AccountAuthenticator {
             JSONObject data = response.getBody().getObject();
             String uuid = data.getString("id");
             String name = data.getString("name");
-            saveUUID=uuid;
-            saveName=name;
-            System.out.println(saveUUID+" "+saveName);
+            saveUUID = uuid;
+            saveName = name;
+            System.out.println(saveUUID + " " + saveName);
+            success=true;
         } else {
             System.out.println("Error: Couldn't get profile!");
         }
     }
-
-    public void setSession(){
-//        if(saveUUID != null) {
-//            Session newSession = new Session(saveName, saveUUID, saveMinecraftToken, "Xbox");
-//            Winter.instance.currentSession = newSession;
-//        }else{
-//            System.out.println("LOGIN FAILED");
-//        }
-    }
-
-
 
 }

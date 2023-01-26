@@ -7,6 +7,10 @@
   "mixins": [
     "MixinMinecraft",
     "MixinGuiMainMenu",
-    "MixinScaledResolution"
+    "MixinGuiInGame",
+    "MixinScaledResolution",
+    "MixinRenderGlobal",
+    "MixinBlockBarrier",
+    "MixinEntityRenderer"
   ]
 }

@@ -1,46 +1,95 @@
 package com.winterclient.gui.core;
 
+import com.winterclient.Winter;
+import com.winterclient.gui.Background;
+import com.winterclient.gui.screens.MainMenu;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WinterGuiScreen extends GuiScreen {
+public abstract class WinterGuiScreen extends GuiScreen {
 
     public List<WinterGuiElement> guiElements = new ArrayList<>();
 
+    @Override
     public void initGui() {
         guiElements.clear();
+        init();
     }
 
-    public void onGuiClosed() {
-
-    }
-
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        guiElements.forEach(element -> element.draw(mouseX,mouseY));
-    }
-
+    @Override
     public void updateScreen() {
-
+        update();
     }
 
+    @Override
+    public void onGuiClosed() {
+        end();
+    }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        Winter.instance.background.draw();
+        draw(mouseX, mouseY);
+        guiElements.forEach(element -> element.draw(mouseX, mouseY));
+    }
+
+    @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        for(WinterGuiElement element : guiElements)
-            if(mouseX>element.x && mouseX<element.x+element.width && mouseY>element.y && mouseY<element.y+element.height)
-                if(element.isCollided(mouseX,mouseY))
-                    element.onClick(mouseX,mouseY);
+        for (WinterGuiElement element : guiElements)
+            if (element.mouseInBounds(mouseX, mouseY))
+                if (element.isCollided(mouseX, mouseY)) {
+                    element.onClick(mouseX, mouseY);
+                    return;
+                }
+        click(mouseX,mouseY,mouseButton);
     }
 
-    public void mouseReleased(int mouseX, int mouseY, int state) {
-
+    @Override
+    public void mouseReleased(int mouseX, int mouseY, int mouseButton) {
+        release(mouseX,mouseY,mouseButton);
     }
 
-    public void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
-
+    @Override
+    public void mouseClickMove(int mouseX, int mouseY, int mouseButton, long timeSinceLastClick) {
+        drag(mouseX,mouseY,mouseButton);
     }
 
-    public void addElement(WinterGuiElement e){
+    @Override
+    public void keyTyped(char typedChar, int keyCode) throws IOException {
+        if (keyCode == 1) {
+            if (!(this instanceof MainMenu)) {
+                this.mc.displayGuiScreen((GuiScreen) null);
+            }
+
+            if (this.mc.currentScreen == null) {
+                this.mc.setIngameFocus();
+            }
+        }
+
+        type(typedChar, keyCode);
+    }
+
+    public abstract void init();
+
+    public abstract void end();
+
+    public abstract void draw(int mouseX, int mouseY);
+
+    public abstract void update();
+
+    public abstract void click(int mouseX, int mouseY, int mouseButton);
+
+    public abstract void release(int mouseX, int mouseY, int mouseButton);
+
+    public abstract void drag(int mouseX, int mouseY, int mouseButton);
+
+    public abstract void type(char typedChar, int keyCode);
+
+    public void addElement(WinterGuiElement e) {
         guiElements.add(e);
     }
 

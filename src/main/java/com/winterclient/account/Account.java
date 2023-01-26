@@ -13,19 +13,18 @@ import java.net.URL;
 public class Account {
 
     public String name,uuid,accessToken,refreshToken;
-
+    public Long expirationTime;
     public RoundedImage avatarImage;
 
-    public Account(String name,String uuid,String accessToken,String refreshToken){
+    public Account(String name,String uuid,String accessToken,String refreshToken,Long expirationTime){
         this.name=name;
         this.uuid=uuid;
         this.accessToken=accessToken;
         this.refreshToken=refreshToken;
-
-        getAvatar();
+        this.expirationTime=expirationTime;
     }
 
-    private void getAvatar(){
+    public void createAvatar(){
         String prefix="https://crafatar.com/avatars/";
         String suffix="?size=40&overlay";
         try {

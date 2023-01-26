@@ -3,6 +3,8 @@ package com.winterclient.data;
 import com.google.gson.*;
 import com.winterclient.account.Account;
 import com.winterclient.auth.AccountAuthenticator;
+import com.winterclient.gui.screens.MainMenu;
+import net.minecraft.client.Minecraft;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,6 +16,9 @@ public class AccountManager {
     public List<Account> accountList;
 
     public Account activeAccount = null;
+
+    public boolean pendingNewAccount = false;
+    public Account pendingAccount;
 
     File dataFolder;
     File accountsFile;
@@ -54,7 +59,12 @@ public class AccountManager {
                 String uuid = accountJsonObject.get("uuid").getAsString();
                 String accessToken = accountJsonObject.get("accessToken").getAsString();
                 String refreshToken = accountJsonObject.get("refreshToken").getAsString();
-                Account account = new Account(name, uuid, accessToken, refreshToken);
+                String expirationTime = accountJsonObject.get("expirationTime").getAsString();
+                Long expirationLong = Long.parseLong(expirationTime);
+                if(name==null||uuid==null||accessToken==null||refreshToken==null||expirationLong==null)
+                    return;
+                Account account = new Account(name, uuid, accessToken, refreshToken,expirationLong);
+                account.createAvatar();
                 accountList.add(account);
 
             }
@@ -82,6 +92,7 @@ public class AccountManager {
                 accountJsonObject.addProperty("uuid", accountObject.uuid);
                 accountJsonObject.addProperty("accessToken", accountObject.accessToken);
                 accountJsonObject.addProperty("refreshToken", accountObject.refreshToken);
+                accountJsonObject.addProperty("expirationTime", accountObject.expirationTime);
                 accountsJsonObject.add(accountObject.uuid, accountJsonObject);
             });
             main.add("accounts", accountsJsonObject);
@@ -105,19 +116,27 @@ public class AccountManager {
 
     public void addAccountThroughMicrosoftToken(String token) {
         AccountAuthenticator a = new AccountAuthenticator();
-        a.getAccessToken(token);
-        if (a.saveMinecraftToken != null) {
-            Account newAccount = new Account(a.saveName, a.saveUUID, a.saveMinecraftToken, a.saveRefreshToken);
-            accountList.add(newAccount);
-            activeAccount = newAccount;
-        }
+
+        new Thread(() -> {
+
+            a.getAccessToken(token);
+            if(a.success){
+                Account newAccount = new Account(a.saveName, a.saveUUID, a.saveMinecraftToken, a.saveRefreshToken, a.saveExpiration);
+                pendingNewAccount=true;
+                pendingAccount=newAccount;
+            }
+        }).start();
+
     }
 
     public void refreshAccount(Account account) {
-        AccountAuthenticator a = new AccountAuthenticator();
+        new Thread(() -> {
+
+            AccountAuthenticator a = new AccountAuthenticator();
         a.getAccessTokenFromRefreshToken(account.refreshToken);
         account.accessToken = a.saveMinecraftToken;
         account.refreshToken = a.saveRefreshToken;
+        }).start();
     }
 
     public void setActiveAccount(Account account) {

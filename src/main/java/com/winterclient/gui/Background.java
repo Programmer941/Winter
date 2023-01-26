@@ -1,66 +1,67 @@
 package com.winterclient.gui;
 
-import com.winterclient.gui.core.WinterGuiElement;
-import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Images;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiMultiplayer;
-import net.minecraft.client.gui.GuiSelectWorld;
 
-public class Background extends WinterGuiElement {
+import java.util.ArrayList;
+import java.util.List;
 
-    boolean drawImage = true;
+public class Background {
+    private List<Snow> snowList;
+    int width,height;
 
-    public Background(int width, int height) {
-        super(0, 0, width, height);
-    }
 
-    public int formulaY(int x){
-        float s = (width/2-(height/-3.73205080757f)/2f);
-        double y = -3.73205080757f*(x-s);
-        return (int) y;
-    }
-
-    public void transitionToSinglePlayer(){
-        Minecraft.getMinecraft().displayGuiScreen(new GuiSelectWorld(Minecraft.getMinecraft().currentScreen));
-    }
-
-    public void transitionToMultiPlayer(){
-        Minecraft.getMinecraft().displayGuiScreen(new GuiMultiplayer(Minecraft.getMinecraft().currentScreen));
-    }
-
-    @Override
-    public void draw(int mouseX, int mouseY) {
-        Images.background.draw(0,0,width,height);
-        RenderUtil.drawLine(0,formulaY(0),width,formulaY(width),0xffffffff,4);
-    }
-
-    @Override
-    public void onClick(int mouseX, int mouseY) {
-        if(mouseY > formulaY(mouseX)) {
-            transitionToMultiPlayer();
-        } else {
-            transitionToSinglePlayer();
+    public Background(int width,int height) {
+        this.width=width;
+        this.height=height;
+        int snowAmount=width/5;
+        snowList=new ArrayList<Snow>();
+        for (int i = 0; i < snowAmount; i++) {
+            snowList.add(new Snow((float) Math.random() * width, (float) Math.random() * height, (float) random(-1, 1), (float) random(1, 2), (float) random(1, 3) * 2));
         }
     }
 
-    @Override
-    public void onRelease(int mouseX, int mouseY) {
-
+    private double random(int min, int max) {
+        return min + Math.random() * (max - min + 1);
     }
 
-    @Override
-    public void onType(char key, int keyCode) {
-
+    public void draw() {
+        Images.background.draw(0, 0, width, height);
+        snowList.forEach(snow -> {
+            snow.move(width,height);
+            snow.draw();
+        });
     }
 
-    @Override
     public void onUpdate() {
 
     }
 
-    @Override
-    public boolean isCollided(int mouseX, int mouseY) {
-        return true;
+    private class Snow {
+        private Snow(float x,float y,float speedX,float speedY,float diameter){
+            this.x=x;
+            this.y=y;
+            this.speedX=speedX;
+            this.speedY=speedY;
+            this.diameter=diameter;
+        }
+        float x,y,speedX,speedY,diameter;
+
+        public void move(int width,int height){
+            this.x += this.speedX / 10f;
+            this.y += this.speedY / 10f;
+
+            if (this.y > height) {
+                this.x = (float) (Math.random() * width);
+                this.y = -40;
+            }
+        }
+
+        public void draw(){
+            Images.snow.draw(this.x, this.y, this.diameter, this.diameter);
+        }
     }
+
+
+
 }

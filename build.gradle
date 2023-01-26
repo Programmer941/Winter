@@ -70,6 +70,7 @@ dependencies {
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
 
     implementation 'com.konghq:unirest-java:3.14.1'
+    implementation 'club.minnced:java-discord-rpc:2.0.2'
 
 
 }

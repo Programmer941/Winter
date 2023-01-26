@@ -1,0 +1,7 @@
+duration=1
+h=8	
+w=16
+x=8
+y=32
+from=./cellPART.png
+to=textures/particle/particles.png
