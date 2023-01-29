@@ -19,7 +19,14 @@ public class EventBus {
     }
 
     public final void unsubscribe(Object o) {
-        subscriptions.stream().filter(s -> s.object == o).forEach(subscriptions::remove);
+        ArrayList<Subscription> remove= new ArrayList<>();
+        subscriptions.forEach(subscription -> {
+            if(subscription.object==o){
+                remove.add(subscription);
+            }
+        });
+        subscriptions.removeAll(remove);
+        //subscriptions.stream().filter(s -> s.object == o).forEach(subscriptions::remove);
     }
 
 	public final void register(Method m, Object o) {

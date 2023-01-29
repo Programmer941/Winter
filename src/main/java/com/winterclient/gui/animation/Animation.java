@@ -93,4 +93,8 @@ if(delay>0){
         this.end = v;
     }
 
+    public boolean finished(){
+        return end==getValue();
+    }
+
 }

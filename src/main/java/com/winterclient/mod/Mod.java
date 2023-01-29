@@ -24,6 +24,14 @@ public class Mod {
         setEnabled(info.enabled());
     }
 
+    public void toggle(){
+        if(enabled){
+            setEnabled(false);
+        }else{
+            setEnabled(true);
+        }
+    }
+
     public void setEnabled(boolean toggled)  {
         EventBus bus = Winter.instance.eventBus;
         if (toggled) {

@@ -1,8 +1,6 @@
 package com.winterclient.mod;
 
-import com.winterclient.mod.implementations.FPS;
-import com.winterclient.mod.implementations.TestMod;
-import com.winterclient.mod.implementations.ToggleSprint;
+import com.winterclient.mod.implementations.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +16,9 @@ public class ModManager {
 
     public final void addModules(){
         addMod(new ToggleSprint());
-        addMod(new FPS());
-        addMod(new TestMod());
-        addMod(new TestMod());
+        addMod(new FPS(20,20,100,50));
+        addMod(new CPS(140,20,100,50));
+        addMod(new KeyStrokes(20+24,100,172,172));
         addMod(new TestMod());
         addMod(new TestMod());
         addMod(new TestMod());

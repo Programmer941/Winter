@@ -14,6 +14,8 @@ public abstract class WinterGuiScreen extends GuiScreen {
 
     public List<WinterGuiElement> guiElements = new ArrayList<>();
 
+    public boolean drawBackground = true;
+
     @Override
     public void initGui() {
         guiElements.clear();
@@ -32,6 +34,7 @@ public abstract class WinterGuiScreen extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        if(drawBackground)
         Winter.instance.background.draw();
         draw(mouseX, mouseY);
         guiElements.forEach(element -> element.draw(mouseX, mouseY));
@@ -45,17 +48,17 @@ public abstract class WinterGuiScreen extends GuiScreen {
                     element.onClick(mouseX, mouseY);
                     return;
                 }
-        click(mouseX,mouseY,mouseButton);
+        click(mouseX, mouseY, mouseButton);
     }
 
     @Override
     public void mouseReleased(int mouseX, int mouseY, int mouseButton) {
-        release(mouseX,mouseY,mouseButton);
+        release(mouseX, mouseY, mouseButton);
     }
 
     @Override
     public void mouseClickMove(int mouseX, int mouseY, int mouseButton, long timeSinceLastClick) {
-        drag(mouseX,mouseY,mouseButton);
+        drag(mouseX, mouseY, mouseButton);
     }
 
     @Override

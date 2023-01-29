@@ -163,9 +163,7 @@ public class AccountAuthenticator {
 
     //Get Minecraft Token
     public void getMinecraftToken(String uhs, String XSTSToken) {
-
-        Date date = new Date();
-        long expiration = date.getTime() + 86400000L;
+        long expiration = System.currentTimeMillis() + 86400000L;
         saveExpiration=expiration;
 
         String link = "https://api.minecraftservices.com/authentication/login_with_xbox";

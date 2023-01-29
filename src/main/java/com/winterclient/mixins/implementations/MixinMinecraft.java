@@ -1,6 +1,7 @@
 package com.winterclient.mixins.implementations;
 
 import com.winterclient.Winter;
+import com.winterclient.event.implementations.ClickEvent;
 import com.winterclient.event.implementations.KeyEvent;
 import com.winterclient.event.implementations.TickEvent;
 import com.winterclient.gui.screens.OverlayMenu;
@@ -66,6 +67,17 @@ public class MixinMinecraft {
             Winter.instance.eventBus.fire(new KeyEvent(character,keyCode,pressed));
         }
     }
+
+    @Inject(method = "clickMouse", at = @At("HEAD"))
+    public void clickMouse(CallbackInfo callbackInfo){
+        Winter.instance.eventBus.fire(new ClickEvent(true));
+    }
+
+    @Inject(method = "rightClickMouse", at = @At("HEAD"))
+    public void rightClickMouse(CallbackInfo callbackInfo){
+        Winter.instance.eventBus.fire(new ClickEvent(false));
+    }
+
 
     @Inject(method = "runGameLoop", at = @At("TAIL"))
     public void runGameLoop(CallbackInfo callbackInfo) {

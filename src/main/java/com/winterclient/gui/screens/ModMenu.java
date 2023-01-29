@@ -17,6 +17,7 @@ public class ModMenu extends WinterGuiScreen {
 
     @Override
     public void init() {
+        drawBackground=false;
         int padding=10;
 
         positionX=width / 2 - 415;
