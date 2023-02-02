@@ -25,6 +25,6 @@ public class FPS extends HUDMod {
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
         int fps = Minecraft.getDebugFPS();
-        Fonts.raleway.drawCenteredString(Integer.toString(fps), x+width/2, y+height/2-Fonts.raleway.FONT_HEIGHT/2, Color.white);
+        Fonts.raleway.drawCenteredString(Integer.toString(fps), x+width/2, y+height/2-Fonts.raleway.FONT_HEIGHT/2);
     }
 }

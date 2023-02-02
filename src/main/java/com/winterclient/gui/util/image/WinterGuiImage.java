@@ -1,5 +1,6 @@
 package com.winterclient.gui.util.image;
 
+import com.winterclient.Winter;
 import org.lwjgl.BufferUtils;
 
 import java.awt.image.BufferedImage;
@@ -14,7 +15,6 @@ public class WinterGuiImage {
     public int textureID,imageWidth,imageHeight;
 
     public WinterGuiImage(BufferedImage image){
-        if(image != null)
         generateImage(image);
     }
 

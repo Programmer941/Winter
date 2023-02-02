@@ -100,7 +100,7 @@ public class KeyStrokes extends HUDMod {
         });
 
         rightClickAnimations.forEach(animation -> {
-            renderPressAnimation(animation,x+88,y+113,74,baseKeySize);
+            renderPressAnimation(animation,x+88,y+113,73,baseKeySize);
 
         });
         ArrayList<Animation> remove= new ArrayList<>();

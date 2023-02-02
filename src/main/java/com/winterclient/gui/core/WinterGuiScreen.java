@@ -45,7 +45,7 @@ public abstract class WinterGuiScreen extends GuiScreen {
         for (WinterGuiElement element : guiElements)
             if (element.mouseInBounds(mouseX, mouseY))
                 if (element.isCollided(mouseX, mouseY)) {
-                    element.onClick(mouseX, mouseY);
+                    element.onClick(mouseX, mouseY,mouseButton);
                     return;
                 }
         click(mouseX, mouseY, mouseButton);

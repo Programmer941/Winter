@@ -15,6 +15,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
+import java.util.logging.Logger;
+
 public enum Winter {
 
     instance;
@@ -25,7 +27,8 @@ public enum Winter {
 
     public EventBus eventBus;
     public ModManager modManager;
-    public KeyBinding test = new KeyBinding("description", Keyboard.KEY_B,"Winter Client");
+
+    Logger logger = Logger.getGlobal();
 
     public final void preInit(){
         accountManager = new AccountManager();
@@ -39,7 +42,6 @@ public enum Winter {
         Discord.start();
         eventBus = new EventBus();
         modManager=new ModManager();
-        Minecraft.getMinecraft().gameSettings.keyBindings= ArrayUtils.add(Minecraft.getMinecraft().gameSettings.keyBindings, test);
     }
 
     public final void end() {

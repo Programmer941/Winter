@@ -1,7 +1,6 @@
 package com.winterclient.gui.elements;
 
 import com.winterclient.gui.core.WinterGuiElement;
-import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Images;
 
 public class TextBox extends WinterGuiElement {
@@ -11,11 +10,11 @@ public class TextBox extends WinterGuiElement {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        Images.uibackground.draw(x,y,width,height);
+
     }
 
     @Override
-    public void onClick(int mouseX, int mouseY) {
+    public void onClick(int mouseX, int mouseY, int mouseButton) {
 
     }
 

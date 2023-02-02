@@ -45,6 +45,30 @@ public class RenderUtil {
         GlStateManager.popMatrix();
     }
 
+    public static void drawLine(float x1, float y1, float x2, float y2, int width, float r, float g, float b, float a) {
+        glColor4f(r, g, b, a);
+        GlStateManager.pushMatrix();
+        GlStateManager.disableTexture2D();
+        GlStateManager.enableAlpha();
+        GlStateManager.enableBlend();
+        GlStateManager.disableCull();
+        GlStateManager.enableColorMaterial();
+        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 0, 1);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glLineWidth(width);
+        GL11.glBegin(GL11.GL_LINES);
+        GL11.glVertex2f(x1, y1);
+        GL11.glVertex2f(x2, y2);
+        GL11.glEnd();
+        GlStateManager.enableCull();
+        GlStateManager.disableAlpha();
+        GlStateManager.disableBlend();
+        GlStateManager.disableColorMaterial();
+        GlStateManager.enableTexture2D();
+        GlStateManager.popMatrix();
+    }
+
     public static void drawRect(float x, float y, float width, float height, int color) {
         color(color);
 
@@ -58,9 +82,9 @@ public class RenderUtil {
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 0, 1);
         glBegin(GL_QUADS);
         glVertex2f(x, y);
-        glVertex2f(x+width, y);
-        glVertex2f(x+width, y+height);
-        glVertex2f(x, y+height);
+        glVertex2f(x + width, y);
+        glVertex2f(x + width, y + height);
+        glVertex2f(x, y + height);
         glEnd();
         GlStateManager.enableCull();
         GlStateManager.disableAlpha();
@@ -82,8 +106,7 @@ public class RenderUtil {
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 0, 1);
         glBegin(GL_POLYGON);
-        for(int i = 0; i < radius; i++)
-        {
+        for (int i = 0; i < radius; i++) {
             float theta = 2.0f * 3.1415926f * i / radius;//get the current angle
 
             float xx = (float) (radius * Math.cos(theta));//calculate the x component

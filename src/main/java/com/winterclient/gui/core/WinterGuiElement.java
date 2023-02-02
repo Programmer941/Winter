@@ -13,7 +13,7 @@ public abstract class WinterGuiElement {
 
     public abstract void draw(int mouseX, int mouseY);
 
-    public abstract void onClick(int mouseX, int mouseY);
+    public abstract void onClick(int mouseX, int mouseY, int mouseButton);
 
     public abstract void onRelease(int mouseX, int mouseY);
 

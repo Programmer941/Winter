@@ -4,7 +4,10 @@ import com.winterclient.Winter;
 import com.winterclient.event.EventBus;
 import com.winterclient.mod.properties.Category;
 import com.winterclient.mod.properties.Info;
+import com.winterclient.setting.Setting;
 import net.minecraft.client.Minecraft;
+
+import java.util.ArrayList;
 
 
 public class Mod {
@@ -16,12 +19,16 @@ public class Mod {
     public Category category;
     public boolean enabled;
 
+    public ArrayList<Setting> settings;
+
     public Mod(){
         Info info = this.getClass().getAnnotation(Info.class);
         name = info.name();
         description = info.description();
         category = info.category();
         setEnabled(info.enabled());
+
+        settings=new ArrayList<>();
     }
 
     public void toggle(){
@@ -41,4 +48,9 @@ public class Mod {
         }
         this.enabled = toggled;
     }
+
+    public void addSetting(Setting setting){
+        settings.add(setting);
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.winterclient.gui.screens;
 
-import com.winterclient.Winter;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.TextButton;
 import net.minecraft.client.Minecraft;
@@ -12,14 +11,14 @@ public class OverlayMenu extends WinterGuiScreen {
         drawBackground=false;
         addElement(new TextButton("Mods",width/2-90,height/2-85,180,50){
             @Override
-            public void onClick(int mouseX, int mouseY) {
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
                 Minecraft.getMinecraft().displayGuiScreen(new ModMenu());
             }
         });
 
         addElement(new TextButton("HUD",width/2-90,height/2-25,180,50){
             @Override
-            public void onClick(int mouseX, int mouseY) {
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
                 Minecraft.getMinecraft().displayGuiScreen(new HUDEditor());
             }
         });

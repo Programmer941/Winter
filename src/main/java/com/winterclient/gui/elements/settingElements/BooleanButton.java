@@ -1,30 +1,30 @@
-package com.winterclient.gui.elements;
+package com.winterclient.gui.elements.settingElements;
 
 import com.winterclient.gui.core.WinterGuiElement;
-import com.winterclient.gui.screens.ModSettingMenu;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
-import com.winterclient.mod.Mod;
-import net.minecraft.client.Minecraft;
+import com.winterclient.setting.implementations.BooleanSetting;
 
 import java.awt.*;
 
-public class ModButton extends WinterGuiElement {
+public class BooleanButton extends WinterGuiElement {
 
-    private Mod mod;
+    String description;
+    BooleanSetting booleanSetting;
 
-    public ModButton(Mod m, int x, int y, int width, int height) {
+    public BooleanButton(String description, int x, int y, int width, int height, BooleanSetting booleanSetting) {
         super(x, y, width, height);
-        this.mod = m;
+        this.description=description;
+        this.booleanSetting=booleanSetting;
     }
 
     @Override
     public void draw(int mouseX, int mouseY) {
         RenderUtil.drawRect(x, y, width, height, 0x90000000);
-        Fonts.raleway.drawCenteredString(mod.name, x + width / 2, y + height / 2 - Fonts.raleway.FONT_HEIGHT / 2);
+        Fonts.raleway.drawCenteredString(description, x + width / 2, y + height / 2 - Fonts.raleway.FONT_HEIGHT / 2);
         Color c = new Color(0x4DFF2B00, true);
-        if (mod.enabled)
+        if (booleanSetting.getValue())
             c = new Color(0x4D26FF00, true);
 
         Images.selected.draw(x,y,20,20,c);
@@ -32,12 +32,7 @@ public class ModButton extends WinterGuiElement {
 
     @Override
     public void onClick(int mouseX, int mouseY, int mouseButton) {
-        //0 is left 1 is right
-        if(mouseButton==0){
-            mod.toggle();
-        }else{
-            Minecraft.getMinecraft().displayGuiScreen(new ModSettingMenu(mod));
-        }
+        booleanSetting.setValue(!booleanSetting.getValue());
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.winterclient.account;
 
 import com.winterclient.gui.util.image.DefaultImage;
-import com.winterclient.gui.util.image.RoundedImage;
-import com.winterclient.gui.util.image.WinterGuiImage;
+import com.winterclient.gui.util.resources.Images;
 import net.minecraft.util.Session;
 
 import javax.imageio.ImageIO;
@@ -14,7 +13,7 @@ public class Account {
 
     public String name,uuid,accessToken,refreshToken;
     public Long expirationTime;
-    public RoundedImage avatarImage;
+    public DefaultImage avatarImage;
 
     public Account(String name,String uuid,String accessToken,String refreshToken,Long expirationTime){
         this.name=name;
@@ -29,7 +28,7 @@ public class Account {
         String suffix="?size=40&overlay";
         try {
             BufferedImage img = ImageIO.read(new URL(prefix+uuid+suffix));
-            avatarImage=new RoundedImage(img,7);
+            avatarImage=new DefaultImage(Images.roundImage(img,7));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -46,8 +46,20 @@ public class HUDEditor extends WinterGuiScreen {
             }
         });
 
-        if(selectedMod!=null)
-            selectedMod.updatePosition(mouseX-offsetX,mouseY-offsetY);
+        if(selectedMod!=null){
+            int xValue=mouseX-offsetX;
+            int yValue=mouseY-offsetY;
+            if(xValue<0)
+                xValue=0;
+            if(yValue<0)
+                yValue=0;
+            if(xValue+selectedMod.width>width)
+                xValue=width-selectedMod.width;
+            if(yValue+selectedMod.height>height)
+                yValue=height-selectedMod.height;
+            selectedMod.updatePosition(xValue,yValue);
+
+        }
     }
 
     @Override

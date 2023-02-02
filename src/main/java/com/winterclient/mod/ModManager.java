@@ -17,9 +17,9 @@ public class ModManager {
     public final void addModules(){
         addMod(new ToggleSprint());
         addMod(new FPS(20,20,100,50));
-        addMod(new CPS(140,20,100,50));
+        addMod(new CPS(140,20,100,72));
         addMod(new KeyStrokes(20+24,100,172,172));
-        addMod(new Ping(200,20,100,50));
+        addMod(new Ping(280,20,100,50));
         addMod(new PotionEffects(20,300,150,300));
         addMod(new TestMod());
         addMod(new TestMod());

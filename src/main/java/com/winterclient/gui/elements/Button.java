@@ -15,7 +15,7 @@ public class Button extends WinterGuiElement {
     }
 
     @Override
-    public void onClick(int mouseX, int mouseY) {
+    public void onClick(int mouseX, int mouseY, int mouseButton) {
 
     }
 

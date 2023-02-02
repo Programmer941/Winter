@@ -9,7 +9,6 @@
     "MixinGuiMainMenu",
     "MixinGuiInGame",
     "MixinScaledResolution",
-    "MixinRenderGlobal",
     "MixinBlockBarrier",
     "MixinEntityRenderer"
   ]

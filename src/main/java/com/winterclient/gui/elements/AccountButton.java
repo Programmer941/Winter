@@ -5,7 +5,6 @@ import com.winterclient.account.Account;
 import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiElement;
 import com.winterclient.gui.util.RenderUtil;
-import com.winterclient.gui.util.image.WinterGuiImage;
 import com.winterclient.gui.util.resources.Images;
 
 public class AccountButton extends WinterGuiElement {
@@ -48,7 +47,7 @@ public class AccountButton extends WinterGuiElement {
     }
 
     @Override
-    public void onClick(int mouseX, int mouseY) {
+    public void onClick(int mouseX, int mouseY, int mouseButton) {
         Winter.instance.accountManager.activeAccount = account;
         System.out.println("set active session to: " + account.name);
     }

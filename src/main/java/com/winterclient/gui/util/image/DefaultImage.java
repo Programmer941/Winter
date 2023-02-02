@@ -15,14 +15,16 @@ public class DefaultImage extends WinterGuiImage{
         super(image);
     }
 
+    //Draws an image at x,y pos with width,height
     public void draw(float x, float y, float width, float height) {
         draw(x, y, width, height, 0f, 0f, imageWidth, imageHeight);
     }
-
+    //Draws specifying color
     public void draw(float x, float y, float width, float height, Color c) {
         draw(x, y, width, height, 0f, 0f, imageWidth, imageHeight, c);
     }
 
+    //Draws srcX is what pixel of the image to start at, srcY is y pixel of image to start at,srcWidth is how many pixels of the image is the width, and same for height
     public void draw(float x, float y, float width, float height, float srcX, float srcY, float srcWidth, float srcHeight) {
         draw(x, y, width, height, srcX, srcY, srcWidth, srcHeight, Color.white);
     }
@@ -43,7 +45,8 @@ public class DefaultImage extends WinterGuiImage{
         glPopMatrix();
     }
 
-    protected void drawSprite(float x, float y, float width, float height, float srcX, float srcY, float srcWidth, float srcHeight) {
+    //Render image without any previous opengl functions
+    public void drawSprite(float x, float y, float width, float height, float srcX, float srcY, float srcWidth, float srcHeight) {
         glBegin(GL_TRIANGLES);
         float renderSRCX = srcX / imageWidth;
         float renderSRCY = srcY / imageHeight;

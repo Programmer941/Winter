@@ -1,13 +1,8 @@
 package com.winterclient.gui.screens;
 
 import com.winterclient.Winter;
-import com.winterclient.gui.Background;
-import com.winterclient.gui.animation.Animation;
-import com.winterclient.gui.core.WinterGuiElement;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.*;
-import com.winterclient.gui.util.RenderUtil;
-import com.winterclient.gui.util.resources.Images;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
@@ -26,13 +21,13 @@ public class MainMenu extends WinterGuiScreen {
 
         addElement(new Button(width / 2 - 30, height - 80, 60, 60) {
             @Override
-            public void onClick(int mouseX, int mouseY) {
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
                 mc.displayGuiScreen(new GuiOptions(mc.currentScreen, Minecraft.getMinecraft().gameSettings));
             }
         });
         addElement(new Button(width - 70, 10, 60, 60) {
             @Override
-            public void onClick(int mouseX, int mouseY) {
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
                 if(GuiScreen.getClipboardString().length()>40){
                     Winter.instance.accountManager.addAccountThroughMicrosoftToken(GuiScreen.getClipboardString());
                 }
@@ -41,13 +36,13 @@ public class MainMenu extends WinterGuiScreen {
 
         addElement(new PlayButton("Singleplayer",60,height/2-60-25,300,60){
             @Override
-            public void onClick(int mouseX, int mouseY) {
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
                 mc.displayGuiScreen(new GuiSelectWorld(mc.currentScreen));
             }
         });
         addElement(new PlayButton("Multiplayer",60,height/2+25,300,60){
             @Override
-            public void onClick(int mouseX, int mouseY) {
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
                 mc.displayGuiScreen(new GuiMultiplayer(mc.currentScreen));
             }
         });

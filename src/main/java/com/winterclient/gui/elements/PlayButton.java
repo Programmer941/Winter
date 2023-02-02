@@ -2,7 +2,6 @@ package com.winterclient.gui.elements;
 
 import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiElement;
-import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
 import org.lwjgl.opengl.GL11;
@@ -38,7 +37,7 @@ public class PlayButton extends WinterGuiElement {
     }
 
     @Override
-    public void onClick(int mouseX, int mouseY) {
+    public void onClick(int mouseX, int mouseY, int mouseButton) {
 
     }
 
