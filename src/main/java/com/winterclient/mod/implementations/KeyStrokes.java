@@ -125,7 +125,7 @@ public class KeyStrokes extends HUDMod {
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         GL11.glScissor(xPos, mc.displayHeight-yPos-48, xSize, ySize);
-        RenderUtil.drawCircle(xPos+xSize/2,yPos+ySize/2,48*a.getValue(),0x50ffffff);
+        RenderUtil.drawCircle(xPos+xSize/2,yPos+ySize/2,48*a.getValue(),new Color(0x50ffffff,true));
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
         GL11.glPopMatrix();
     }

@@ -11,16 +11,12 @@ import static org.lwjgl.opengl.GL11.glPopMatrix;
 
 public class RenderUtil {
 
-    public static void color(int color) {
-        float alpha = (color >> 24 & 0xFF) / 255f;
-        float red = (color >> 16 & 0xFF) / 255f;
-        float green = (color >> 8 & 0xFF) / 255f;
-        float blue = (color & 0xFF) / 255f;
-        glColor4f(red, green, blue, alpha);
+    public static void color(Color c) {
+        glColor4f(c.getRed()/255f, c.getGreen()/255f, c.getBlue()/255f, c.getAlpha()/255f);
     }
 
     //Draw Shapes
-    public static void drawLine(float x1, float y1, float x2, float y2, int width, int color) {
+    public static void drawLine(float x1, float y1, float x2, float y2, int width, Color color) {
         color(color);
 
         GlStateManager.pushMatrix();
@@ -45,31 +41,7 @@ public class RenderUtil {
         GlStateManager.popMatrix();
     }
 
-    public static void drawLine(float x1, float y1, float x2, float y2, int width, float r, float g, float b, float a) {
-        glColor4f(r, g, b, a);
-        GlStateManager.pushMatrix();
-        GlStateManager.disableTexture2D();
-        GlStateManager.enableAlpha();
-        GlStateManager.enableBlend();
-        GlStateManager.disableCull();
-        GlStateManager.enableColorMaterial();
-        GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 0, 1);
-        GL11.glEnable(GL11.GL_LINE_SMOOTH);
-        GL11.glLineWidth(width);
-        GL11.glBegin(GL11.GL_LINES);
-        GL11.glVertex2f(x1, y1);
-        GL11.glVertex2f(x2, y2);
-        GL11.glEnd();
-        GlStateManager.enableCull();
-        GlStateManager.disableAlpha();
-        GlStateManager.disableBlend();
-        GlStateManager.disableColorMaterial();
-        GlStateManager.enableTexture2D();
-        GlStateManager.popMatrix();
-    }
-
-    public static void drawRect(float x, float y, float width, float height, int color) {
+    public static void drawRect(float x, float y, float width, float height, Color color) {
         color(color);
 
         GlStateManager.pushMatrix();
@@ -94,7 +66,7 @@ public class RenderUtil {
         GlStateManager.popMatrix();
     }
 
-    public static void drawCircle(float x, float y, float radius, int color) {
+    public static void drawCircle(float x, float y, float radius, Color color) {
         color(color);
 
         GlStateManager.pushMatrix();

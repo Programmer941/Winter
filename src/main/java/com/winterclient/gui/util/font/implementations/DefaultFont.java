@@ -1,5 +1,6 @@
 package com.winterclient.gui.util.font.implementations;
 
+import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.font.WinterGuiFont;
 
 import java.awt.*;
@@ -9,10 +10,11 @@ public class DefaultFont extends WinterGuiFont {
         super(font);
     }
 
-    private void drawChar(char c,int x,int y,Color color){
+    public int drawChar(char c,int x,int y,Color color){
         CharData ch = this.charDatas[c];
 
         fontImage.draw(x,y,ch.width,ch.height,ch.x,0,ch.width,ch.height,color);
+        return ch.width;
     }
 
     public void drawString(String text,int x,int y,Color color){

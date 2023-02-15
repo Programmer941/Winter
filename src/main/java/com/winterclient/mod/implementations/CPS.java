@@ -66,7 +66,7 @@ public class CPS extends HUDMod {
 
         if(title.getValue()){
             Fonts.raleway.drawCenteredString("CPS", x+width/2, y+4);
-            RenderUtil.drawLine(x+width/2,y+40,x+width/2,y+63,2,-1);
+            RenderUtil.drawLine(x+width/2,y+40,x+width/2,y+63,2,Color.white);
             Fonts.raleway.drawCenteredString(leftCps.size()+"", x+width/4, y+34);
             Fonts.raleway.drawCenteredString(rightCps.size()+"", x+3*width/4, y+34);
         }else{

@@ -21,7 +21,7 @@ public class BooleanButton extends WinterGuiElement {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        RenderUtil.drawRect(x, y, width, height, 0x90000000);
+        RenderUtil.drawRect(x, y, width, height, new Color(0x90000000,true));
         Fonts.raleway.drawCenteredString(description, x + width / 2, y + height / 2 - Fonts.raleway.FONT_HEIGHT / 2);
         Color c = new Color(0x4DFF2B00, true);
         if (booleanSetting.getValue())

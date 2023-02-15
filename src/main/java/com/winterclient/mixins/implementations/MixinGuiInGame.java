@@ -39,8 +39,8 @@ public class MixinGuiInGame {
         int padding = 4;
         EntityPlayer entityplayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
         int currentSlot = entityplayer.inventory.currentItem;
-        RenderUtil.drawRect(width / 2 - 180, height - 40, 360, 40, 0x90000000);
-        RenderUtil.drawRect(width / 2 - 180 + currentSlot * 40 + 2, height - 40 + 2, 36, 36, 0x50ffffff);
+        RenderUtil.drawRect(width / 2 - 180, height - 40, 360, 40, new Color(0x90000000,true));
+        RenderUtil.drawRect(width / 2 - 180 + currentSlot * 40 + 2, height - 40 + 2, 36, 36, new Color(0x50ffffff,true));
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableRescaleNormal();
         GlStateManager.enableBlend();
@@ -50,7 +50,7 @@ public class MixinGuiInGame {
         GlStateManager.alphaFunc(516, 0.1F);
         GlStateManager.blendFunc(770, 771);
         int xPos = width / 2 - 180 + 4;
-        RenderUtil.drawLine(-10,-10,-10,-10,2,-1);
+        RenderUtil.drawLine(-10,-10,-10,-10,2,Color.white);
         for (int i = 0; i < 9; i++) {
             ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.mainInventory[i];
             GL11.glPushMatrix();
@@ -70,8 +70,8 @@ public class MixinGuiInGame {
 
                 if (itemstack.isItemDamaged()) {
                     float durabilityPercent = 1 - ((float) itemstack.getItemDamage() / (float) itemstack.getMaxDamage());
-                    RenderUtil.drawLine(xPos, height - 4, xPos + 32, height - 4, 2, 0xffff0000);
-                    RenderUtil.drawLine(xPos, height - 4, xPos + 32, height - 4, 2, 0, 1, 0, durabilityPercent);
+                    RenderUtil.drawLine(xPos, height - 4, xPos + 32, height - 4, 2, Color.red);
+                    RenderUtil.drawLine(xPos, height - 4, xPos + 32, height - 4, 2, new Color(0,1,0,durabilityPercent));
                 }
             }
             xPos += 40;

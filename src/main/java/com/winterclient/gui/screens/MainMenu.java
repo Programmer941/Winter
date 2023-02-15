@@ -3,11 +3,15 @@ package com.winterclient.gui.screens;
 import com.winterclient.Winter;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.*;
+import com.winterclient.gui.elements.Button;
+import com.winterclient.gui.util.resources.Fonts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiSelectWorld;
+
+import java.awt.*;
 
 public class MainMenu extends WinterGuiScreen {
 
@@ -71,7 +75,7 @@ public class MainMenu extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-
+        Fonts.raleway.drawString("HIIII",300,300);
     }
 
     @Override

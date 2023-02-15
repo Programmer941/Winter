@@ -50,7 +50,7 @@ public class ModMenu extends WinterGuiScreen {
         GL11.glTranslatef(-width/2-250, 0, 0.0f);
         Images.loadingBar.draw(width/2-250,-height/2-235-33-10, 500, 33, new Color(0xEAEEF0));
         GL11.glPopMatrix();
-        RenderUtil.drawRect(width/2-415,height/2-235,830,470,0x90000000);
+        RenderUtil.drawRect(width/2-415,height/2-235,830,470,new Color(0x90000000,true));
     }
 
     @Override

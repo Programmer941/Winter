@@ -32,12 +32,12 @@ public enum Winter {
 
     public final void preInit(){
         accountManager = new AccountManager();
+        BorrowLunarAccounts.readAccounts();
         background=new Background(Display.getWidth(),Display.getHeight());
         loadingScreen=new LoadingScreen();
     }
 
     public final void init() {
-        BorrowLunarAccounts.readAccounts();
         Display.setTitle("Winter Client");
         Discord.start();
         eventBus = new EventBus();

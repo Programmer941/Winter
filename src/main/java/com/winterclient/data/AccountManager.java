@@ -43,7 +43,10 @@ public class AccountManager {
     public void loadAccounts() {
         try {
             FileReader reader = new FileReader(accountsFile);
-            JsonObject main = JsonParser.parseReader(reader).getAsJsonObject();
+            JsonElement mainElement = JsonParser.parseReader(reader);
+            if(mainElement.isJsonNull())
+                return;
+            JsonObject main=mainElement.getAsJsonObject();
             reader.close();
 
             JsonElement accountsJsonElement = main.get("accounts");
