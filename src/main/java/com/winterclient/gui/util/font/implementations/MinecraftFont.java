@@ -2,11 +2,13 @@ package com.winterclient.gui.util.font.implementations;
 
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.font.WinterGuiFont;
+import com.winterclient.gui.util.resources.Fonts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MinecraftFont {
 
@@ -51,7 +53,6 @@ public class MinecraftFont {
             }
 
             this.colorCode[index] = new Color(red, green, blue);
-            System.out.println(colorCode[index]);
         }
     }
 
@@ -67,7 +68,7 @@ public class MinecraftFont {
         int size = text.length();
         for (int i = 0; i < size; i++) {
             char character = text.charAt(i);
-            if ((character == '§') && (i < size)) {
+            if ((character == '§') && (i < size - 1)) {
                 int colorIndex = 21;
 
                 try {
@@ -171,14 +172,61 @@ public class MinecraftFont {
         }
     }
 
+    public ArrayList<String> wrapString(String s, int maxSize) {
+        //System.out.println("WRAPPED STRING");
+        //System.out.println(s);
+        if (s.contains("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")) {
+            s = s.replace("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬", "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        }
+        ArrayList<String> returnArray = new ArrayList<String>();
+        StringBuilder outputString = new StringBuilder();
+        StringBuilder outputNotation = new StringBuilder();
+        int currentSize = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char character = s.charAt(i);
+            if (character == 10) {
+                //System.out.println(outputString.toString());
+                returnArray.add(outputString.toString());
+                outputString = new StringBuilder();
+                currentSize = 0;
+                outputString.append(outputNotation.toString());
+                outputNotation = new StringBuilder();
+            } else {
+                {
+
+                    int letterSize = getStringSize(String.valueOf(character));
+                    if (currentSize + letterSize > maxSize) {
+                        //System.out.println(outputString.toString());
+                        returnArray.add(outputString.toString());
+                        outputString = new StringBuilder();
+                        currentSize = 0;
+                        outputString.append(outputNotation.toString());
+                    }
+                    outputString.append(character);
+                    int min = Math.max(i - 1, 0);
+                    if (character != '§' && s.charAt(min) != '§') {
+                        currentSize += letterSize;
+                    } else {
+                        outputNotation.append(character);
+                    }
+                }
+            }
+        }
+        if (outputString.toString().length() > 0) {
+            returnArray.add(outputString.toString());
+            //System.out.println(outputString.toString());
+        }
+        return returnArray;
+    }
+
     public int getStringSize(String s) {
-        int totalSize=0;
+        int totalSize = 0;
         boolean bold = false;
         boolean italic = false;
         int size = s.length();
         for (int i = 0; i < size; i++) {
             char character = s.charAt(i);
-            if ((character == '§') && (i < size)) {
+            if ((character == '§') && (i < size - 1)) {
                 int colorIndex = 21;
 
                 try {
@@ -195,10 +243,10 @@ public class MinecraftFont {
                         colorIndex = 15;
 
 
-                }else if (colorIndex == 17) {
+                } else if (colorIndex == 17) {
                     bold = true;
 
-                }else if (colorIndex == 20) {
+                } else if (colorIndex == 20) {
                     italic = true;
                 } else if (colorIndex == 21) {
                     bold = false;
@@ -208,10 +256,10 @@ public class MinecraftFont {
             } else {
                 if (character <= 256) {
                     int width = activeFont.getStringWidth(String.valueOf(character));
-                    totalSize+=width;
+                    totalSize += width;
                 } else if (emojiFont.canDrawChar(character)) {
                     int width = emojiFont.getCharWidth(character);
-                    totalSize+=width;
+                    totalSize += width;
                 } else {
                     int scale = 3;
                     StringBuilder formattedString = new StringBuilder();
@@ -228,9 +276,5 @@ public class MinecraftFont {
             }
         }
         return totalSize;
-    }
-
-    public void drawWrappedString(){
-
     }
 }

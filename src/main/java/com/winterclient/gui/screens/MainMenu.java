@@ -1,9 +1,11 @@
 package com.winterclient.gui.screens;
 
 import com.winterclient.Winter;
+import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.*;
 import com.winterclient.gui.elements.Button;
+import com.winterclient.gui.shader.implementations.BlurShader;
 import com.winterclient.gui.util.resources.Fonts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMultiplayer;
@@ -15,8 +17,13 @@ import java.awt.*;
 
 public class MainMenu extends WinterGuiScreen {
 
+    BlurShader blurShader;
+    Animation e;
     @Override
     public void init() {
+        blurShader=new BlurShader();
+        e=new Animation(0);
+        e.goTo(100,15f);
         int x = 10;
         for (int i = 0; i < Winter.instance.accountManager.accountList.size(); i++) {
             addElement(new AccountButton(Winter.instance.accountManager.accountList.get(i), x, 10));
@@ -75,7 +82,8 @@ public class MainMenu extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        Fonts.raleway.drawString("HIIII",300,300);
+        blurShader.renderBlur(0,0,Minecraft.getMinecraft().displayWidth,Minecraft.getMinecraft().displayHeight, 15f);
+
     }
 
     @Override

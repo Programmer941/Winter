@@ -18,6 +18,7 @@ public class MixinGuiNewChat {
     private void setChatLine(IChatComponent chatComponent, int chatLineId, int updateCounter, boolean displayOnly, CallbackInfo callbackInfo){
         Chat c= (Chat) Winter.instance.modManager.getModule("Chat");
         c.addMessage(chatComponent.getFormattedText());
+        System.out.println(chatComponent.getFormattedText());
     }
 
 

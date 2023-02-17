@@ -39,7 +39,8 @@ public class MixinGuiInGame {
         int padding = 4;
         EntityPlayer entityplayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
         int currentSlot = entityplayer.inventory.currentItem;
-        RenderUtil.drawRect(width / 2 - 180, height - 40, 360, 40, new Color(0x90000000,true));
+        //RenderUtil.drawRect(width / 2 - 180, height - 40, 360, 40, new Color(0x90000000,true));
+        Winter.instance.blurShader.renderBlur(width / 2 - 180, height - 40, 360, 40,50);
         RenderUtil.drawRect(width / 2 - 180 + currentSlot * 40 + 2, height - 40 + 2, 36, 36, new Color(0x50ffffff,true));
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableRescaleNormal();

@@ -21,7 +21,7 @@ public class ModManager {
         addMod(new KeyStrokes(20+24,100,172,172));
         addMod(new Ping(280,20,100,50));
         addMod(new PotionEffects(20,300,150,300));
-        addMod(new Chat(100,100,800,400));
+        addMod(new Chat(100,100,800,500));
         addMod(new TestMod());
         addMod(new TestMod());
         addMod(new TestMod());

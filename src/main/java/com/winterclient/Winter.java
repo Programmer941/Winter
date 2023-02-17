@@ -7,6 +7,8 @@ import com.winterclient.event.EventBus;
 import com.winterclient.gui.Background;
 
 import com.winterclient.gui.LoadingScreen;
+import com.winterclient.gui.shader.implementations.BlurShader;
+import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.mod.Mod;
 import com.winterclient.mod.ModManager;
 import net.minecraft.client.Minecraft;
@@ -24,6 +26,7 @@ public enum Winter {
     public AccountManager accountManager;
     public Background background;
     public LoadingScreen loadingScreen;
+    public BlurShader blurShader;
 
     public EventBus eventBus;
     public ModManager modManager;
@@ -35,6 +38,7 @@ public enum Winter {
         BorrowLunarAccounts.readAccounts();
         background=new Background(Display.getWidth(),Display.getHeight());
         loadingScreen=new LoadingScreen();
+        blurShader=new BlurShader();
     }
 
     public final void init() {
