@@ -82,7 +82,10 @@ public abstract class WinterGuiScreen extends GuiScreen {
 
     public abstract void draw(int mouseX, int mouseY);
 
-    public abstract void update();
+    public void update(){
+        for (WinterGuiElement element : guiElements)
+            element.onUpdate();
+    };
 
     public abstract void click(int mouseX, int mouseY, int mouseButton);
 

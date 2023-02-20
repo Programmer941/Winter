@@ -39,29 +39,30 @@ public class BlurShader extends Shader {
     }
 
     public void renderBlur(int x,int y,int width,int height,float radius){
+        Minecraft mc = Minecraft.getMinecraft();
         GlStateManager.enableBlend();
         GlStateManager.color(1, 1, 1, 1);
         OpenGlHelper.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
-        framebuffer = createFrameBuffer(framebuffer, width, height);
+        framebuffer = createFrameBuffer(framebuffer, mc.displayWidth, mc.displayHeight);
         framebuffer.framebufferClear();
         framebuffer.bindFramebuffer(true);
 
         load();
         setupUniforms(1, 0, radius);
-        GL11.glBindTexture(GL_TEXTURE_2D,Minecraft.getMinecraft().getFramebuffer().framebufferTexture);
+        GL11.glBindTexture(GL_TEXTURE_2D,mc.getFramebuffer().framebufferTexture);
 
-        drawFirstBuffer();
+        drawQuads(x-15, y-15, width+30, height+30, x-15, y-15, width+30, height+30, mc.getFramebuffer().framebufferWidth, mc.getFramebuffer().framebufferHeight);
         framebuffer.unbindFramebuffer();
         unload();
 
 
-        Minecraft.getMinecraft().getFramebuffer().bindFramebuffer(true);
+        mc.getFramebuffer().bindFramebuffer(true);
         load();
         setupUniforms(0, 1, radius);
 
         GL11.glBindTexture(GL_TEXTURE_2D,framebuffer.framebufferTexture);
-        drawQuads(x, y, width, height, x, y, width, height, Minecraft.getMinecraft().getFramebuffer().framebufferWidth, Minecraft.getMinecraft().getFramebuffer().framebufferHeight);
+        drawQuads(x, y, width, height, x, y, width, height, mc.getFramebuffer().framebufferWidth, mc.getFramebuffer().framebufferHeight);
         unload();
         resetColor();
         GlStateManager.bindTexture(0);
@@ -85,9 +86,9 @@ public class BlurShader extends Shader {
     public void drawQuads(float x, float y, float width, float height, float srcX, float srcY, float srcWidth, float srcHeight,float imageWidth,float imageHeight) {
         glBegin(GL_TRIANGLES);
         float renderSRCX = srcX / imageWidth;
-        float renderSRCY = srcY / imageHeight;
+        float renderSRCY = 1-srcY / imageHeight;
         float renderSRCWidth = srcWidth / imageWidth;
-        float renderSRCHeight = srcHeight / imageHeight;
+        float renderSRCHeight = -srcHeight / imageHeight;
         glTexCoord2f(renderSRCX + renderSRCWidth, renderSRCY);
         glVertex2f(x + width, y);
         glTexCoord2f(renderSRCX, renderSRCY);

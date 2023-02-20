@@ -11,6 +11,7 @@
     "MixinScaledResolution",
     "MixinBlockBarrier",
     "MixinEntityRenderer",
-    "MixinGuiNewChat"
+    "MixinGuiNewChat",
+    "MixinGuiChat"
   ]
 }

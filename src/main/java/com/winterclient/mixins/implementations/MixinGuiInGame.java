@@ -5,7 +5,9 @@ import com.winterclient.event.implementations.OverlayEvent;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
+import com.winterclient.mod.implementations.Scoreboard;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,10 +15,12 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.boss.BossStatus;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -26,6 +30,12 @@ import java.awt.*;
 
 @Mixin(GuiIngame.class)
 public class MixinGuiInGame {
+
+    @Overwrite
+    private void renderScoreboard(ScoreObjective objective, ScaledResolution scaledRes){
+        Scoreboard.instance.objective=objective;
+    }
+
 
     @Inject(method = "renderGameOverlay", at = @At("TAIL"))
     public void renderGameOverlay(float partialTicks, CallbackInfo callbackInfo) {
@@ -40,7 +50,7 @@ public class MixinGuiInGame {
         EntityPlayer entityplayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
         int currentSlot = entityplayer.inventory.currentItem;
         //RenderUtil.drawRect(width / 2 - 180, height - 40, 360, 40, new Color(0x90000000,true));
-        Winter.instance.blurShader.renderBlur(width / 2 - 180, height - 40, 360, 40,50);
+        Winter.instance.blurShader.renderBlur(width / 2 - 180, height - 40, 360, 40,9);
         RenderUtil.drawRect(width / 2 - 180 + currentSlot * 40 + 2, height - 40 + 2, 36, 36, new Color(0x50ffffff,true));
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableRescaleNormal();
@@ -107,22 +117,23 @@ public class MixinGuiInGame {
     @Inject(method = "renderPlayerStats", at = @At("TAIL"))
     public void renderPlayerStatsEnd(ScaledResolution scaledRes, CallbackInfo callbackInfo) {
         GL11.glPopMatrix();
-//        if (BossStatus.bossName != null && BossStatus.statusBarTime > 0){
-//            --BossStatus.statusBarTime;
-//            int width = Minecraft.getMinecraft().displayWidth;
-//            float percentHealth = BossStatus.healthScale;
-//            int percentWidth = (int) (percentHealth*500f);
-//            Fonts.ralewaySmall.drawCenteredString(BossStatus.bossName,width/2,4);
-//            GL11.glPushMatrix();
-//            GL11.glTranslatef(width/2-250, 0, 1);
-//            GL11.glScalef(-1, -1, 1);
-//            GL11.glTranslatef(-width/2-250, 0, 1);
-//            Images.loadingBar.draw(width/2-250,-33-30-6, 500, 33, Color.white);
-//            Images.loadingBar.draw(width / 2 - 250+percentWidth, -33-30-6, 500-percentWidth, 33,percentWidth,0,(500-percentWidth),33,new Color(69, 82, 134, 255));
-//
-//            GL11.glPopMatrix();
-//
-//        }
+        if (BossStatus.bossName != null && BossStatus.statusBarTime > 0){
+            --BossStatus.statusBarTime;
+            int width = Minecraft.getMinecraft().displayWidth;
+            float percentHealth = BossStatus.healthScale;
+            int percentWidth = (int) (percentHealth*500f);
+            int stringWidth = Fonts.mcFont.getStringSize(BossStatus.bossName);
+            GL11.glPushMatrix();
+            Fonts.mcFont.drawString(BossStatus.bossName,width/2-stringWidth/2,4,-1,false);
+            GL11.glTranslatef(width/2-250, 0, 1);
+            GL11.glScalef(-1, -1, 1);
+            GL11.glTranslatef(-width/2-250, 0, 1);
+            Images.loadingBar.draw(width/2-250,-33-30-6-4, 500, 33, Color.white);
+            Images.loadingBar.draw(width / 2 - 250+percentWidth, -33-30-6-4, 500-percentWidth, 33,percentWidth,0,(500-percentWidth),33,new Color(69, 82, 134, 255));
+
+            GL11.glPopMatrix();
+            Minecraft.getMinecraft().getTextureManager().bindTexture(Gui.icons);
+        }
     }
 
     @Overwrite
@@ -144,6 +155,27 @@ public class MixinGuiInGame {
 
     }
 
+
+    @Overwrite
+    public void renderBossHealth(){
+//        if (BossStatus.bossName != null && BossStatus.statusBarTime > 0){
+//            --BossStatus.statusBarTime;
+//            int width = Minecraft.getMinecraft().displayWidth;
+//            float percentHealth = BossStatus.healthScale;
+//            int percentWidth = (int) (percentHealth*500f);
+//            int stringWidth = Fonts.mcFont.getStringSize(BossStatus.bossName);
+//            GL11.glPushMatrix();
+//            Fonts.mcFont.drawString(BossStatus.bossName,width/2-stringWidth/2,4,-1,false);
+//            GL11.glTranslatef(width/2-250, 0, 1);
+//            GL11.glScalef(-1, -1, 1);
+//            GL11.glTranslatef(-width/2-250, 0, 1);
+//            Images.loadingBar.draw(width/2-250,-33-30-6+4, 500, 33, Color.white);
+//            Images.loadingBar.draw(width / 2 - 250+percentWidth, -33-30-6+4, 500-percentWidth, 33,percentWidth,0,(500-percentWidth),33,new Color(69, 82, 134, 255));
+//
+//            GL11.glPopMatrix();
+//            Minecraft.getMinecraft().getTextureManager().bindTexture(Gui.icons);
+//        }
+    }
 
 
 }

@@ -22,7 +22,12 @@ public class OverlayMenu extends WinterGuiScreen {
                 Minecraft.getMinecraft().displayGuiScreen(new HUDEditor());
             }
         });
-        addElement(new TextButton("KeyBinds",width/2-90,height/2+35,180,50));
+        addElement(new TextButton("KeyBinds",width/2-90,height/2+35,180,50){
+            @Override
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
+                Minecraft.getMinecraft().displayGuiScreen(new ChatEvents());
+            }
+        });
     }
 
     @Override

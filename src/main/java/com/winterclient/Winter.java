@@ -31,7 +31,7 @@ public enum Winter {
     public EventBus eventBus;
     public ModManager modManager;
 
-    Logger logger = Logger.getGlobal();
+    public Logger logger = Logger.getGlobal();
 
     public final void preInit(){
         accountManager = new AccountManager();
@@ -39,6 +39,7 @@ public enum Winter {
         background=new Background(Display.getWidth(),Display.getHeight());
         loadingScreen=new LoadingScreen();
         blurShader=new BlurShader();
+        Fonts.mcFont.wrapString("hiii LOL WHO OK TEX T TEST PLEASE :)",800);
     }
 
     public final void init() {

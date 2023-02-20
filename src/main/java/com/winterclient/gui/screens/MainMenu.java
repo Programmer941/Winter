@@ -54,7 +54,7 @@ public class MainMenu extends WinterGuiScreen {
         addElement(new PlayButton("Multiplayer",60,height/2+25,300,60){
             @Override
             public void onClick(int mouseX, int mouseY, int mouseButton) {
-                mc.displayGuiScreen(new GuiMultiplayer(mc.currentScreen));
+                mc.displayGuiScreen(new Multiplayer());
             }
         });
         //addElement(new PlayButton("Multiplayer",60,height/2+40,500,33));
@@ -82,7 +82,6 @@ public class MainMenu extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        blurShader.renderBlur(0,0,Minecraft.getMinecraft().displayWidth,Minecraft.getMinecraft().displayHeight, 15f);
 
     }
 

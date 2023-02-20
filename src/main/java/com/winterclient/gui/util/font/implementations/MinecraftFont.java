@@ -20,6 +20,8 @@ public class MinecraftFont {
 
     DefaultFont activeFont;
 
+    public int FONT_HEIGHT;
+
     public MinecraftFont(Font font) {
         regularFont = new DefaultFont(font.deriveFont(Font.PLAIN));
         boldFont = new DefaultFont(font.deriveFont(Font.BOLD));
@@ -27,6 +29,7 @@ public class MinecraftFont {
         boldItalicFont = new DefaultFont(font.deriveFont(Font.BOLD + Font.ITALIC));
         emojiFont = new EmojiFont();
         activeFont = regularFont;
+        FONT_HEIGHT=activeFont.FONT_HEIGHT;
         setupMinecraftColorCodes();
     }
 
@@ -64,6 +67,9 @@ public class MinecraftFont {
         boolean underline = false;
 
         Color currentColor = Color.white;
+
+        if (text == null)
+            return;
 
         int size = text.length();
         for (int i = 0; i < size; i++) {
@@ -144,6 +150,7 @@ public class MinecraftFont {
                     if (underline)
                         RenderUtil.drawLine(x, y + emojiFont.FONT_HEIGHT, x - width, y + emojiFont.FONT_HEIGHT, 2, currentColor);
                 } else {
+                    //System.out.println(character+" "+(int) character);
                     int scale = 3;
                     StringBuilder formattedString = new StringBuilder();
                     if (randomCase)
@@ -153,7 +160,6 @@ public class MinecraftFont {
                     if (italic)
                         formattedString.append("§o");
                     formattedString.append(character);
-                    System.out.println(character);
                     GL11.glPushMatrix();
                     GL11.glTranslatef(x, y + 6, 1);
                     GL11.glScalef(scale, scale, 1);
@@ -173,48 +179,47 @@ public class MinecraftFont {
     }
 
     public ArrayList<String> wrapString(String s, int maxSize) {
-        //System.out.println("WRAPPED STRING");
-        //System.out.println(s);
         if (s.contains("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")) {
             s = s.replace("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬", "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         }
+
         ArrayList<String> returnArray = new ArrayList<String>();
-        StringBuilder outputString = new StringBuilder();
-        StringBuilder outputNotation = new StringBuilder();
         int currentSize = 0;
+
+        StringBuilder outputString = new StringBuilder();
+        StringBuilder wordBuilder = new StringBuilder();
+        StringBuilder outputNotation = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
             char character = s.charAt(i);
+
             if (character == 10) {
+                returnArray.add(outputString.toString());
+                outputString.setLength(0);
+                currentSize = 0;
+                outputNotation.setLength(0);
+                continue;
+            }
+
+            int letterSize = getStringSize(String.valueOf(character));
+            if (currentSize + letterSize > maxSize) {
                 //System.out.println(outputString.toString());
                 returnArray.add(outputString.toString());
                 outputString = new StringBuilder();
                 currentSize = 0;
                 outputString.append(outputNotation.toString());
-                outputNotation = new StringBuilder();
-            } else {
-                {
-
-                    int letterSize = getStringSize(String.valueOf(character));
-                    if (currentSize + letterSize > maxSize) {
-                        //System.out.println(outputString.toString());
-                        returnArray.add(outputString.toString());
-                        outputString = new StringBuilder();
-                        currentSize = 0;
-                        outputString.append(outputNotation.toString());
-                    }
-                    outputString.append(character);
-                    int min = Math.max(i - 1, 0);
-                    if (character != '§' && s.charAt(min) != '§') {
-                        currentSize += letterSize;
-                    } else {
-                        outputNotation.append(character);
-                    }
-                }
             }
+            outputString.append(character);
+            int min = Math.max(i - 1, 0);
+            if (character != '§' && s.charAt(min) != '§') {
+                currentSize += letterSize;
+            } else {
+                outputNotation.append(character);
+            }
+
+
         }
         if (outputString.toString().length() > 0) {
             returnArray.add(outputString.toString());
-            //System.out.println(outputString.toString());
         }
         return returnArray;
     }
@@ -276,5 +281,10 @@ public class MinecraftFont {
             }
         }
         return totalSize;
+    }
+
+    public void drawCenteredString(String s,int x,int y){
+        int width= getStringSize(s);
+        drawString(s,x-width/2,y,-1,false);
     }
 }
