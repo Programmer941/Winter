@@ -21,6 +21,7 @@ public class Images {
     public static DefaultImage selected = new DefaultImage(getImage("selected.png"));
     public static DefaultImage keyStrokes = new DefaultImage(getImage("keystrokes.png"));
     public static DefaultImage drop = new DefaultImage(getImage("drop.png"));
+    public static DefaultImage crosshair = new DefaultImage(getImage("crosshair.png"));
 
     public static BufferedImage getImage(String name){
         BufferedImage bufferedImage = null;

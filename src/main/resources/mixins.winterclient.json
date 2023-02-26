@@ -12,6 +12,12 @@
     "MixinBlockBarrier",
     "MixinEntityRenderer",
     "MixinGuiNewChat",
-    "MixinGuiChat"
+    "MixinGuiChat",
+    "MixinNetHandlerPlayClient",
+    "MixinScoreboard",
+    "MixinEntityLivingBase",
+    "MixinItemModelGenerator",
+    "MixinEntityPlayer",
+    "MixinEntityPlayerSP"
   ]
 }

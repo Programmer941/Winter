@@ -44,6 +44,7 @@ public class WinterGuiFont {
         g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         FontMetrics fontMetrics = g.getFontMetrics();
         FONT_HEIGHT = fontMetrics.getHeight();
+        System.out.println(FONT_HEIGHT+ "FONT HEIGHT");
         int x=0,y=0;
         for (int i = 0; i < 256; i++) {
             char c = (char) i;

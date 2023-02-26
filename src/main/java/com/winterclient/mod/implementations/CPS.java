@@ -6,11 +6,9 @@ import com.winterclient.event.implementations.OverlayEvent;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.mod.HUDMod;
-import com.winterclient.mod.Mod;
 import com.winterclient.mod.properties.Category;
 import com.winterclient.mod.properties.Info;
 import com.winterclient.setting.implementations.BooleanSetting;
-import net.minecraft.client.Minecraft;
 
 import java.awt.*;
 import java.util.ArrayList;

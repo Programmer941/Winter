@@ -25,18 +25,18 @@ public class EmojiFont {
     int totalFonts;
     int currentFont = 0;
 
-    public EmojiFont() {
-        Font font1 = Fonts.getFont("monorale.ttf").deriveFont(30f);
-        Font font2 = Fonts.getFont("regular.ttf").deriveFont(30f);
-        Font font3 = Fonts.getFont("symbol.ttf").deriveFont(30f);
-        Font font4 = Fonts.getFont("symbol2.ttf").deriveFont(30f);
-        Font font5 = Fonts.getFont("math.ttf").deriveFont(30f);
-        Font font7 = Fonts.getFont("emoji.ttf").deriveFont(30f);
-        Font font6 = Fonts.getFont("music.ttf").deriveFont(30f);
-        Font font9 = Fonts.getFont("tamil.ttf").deriveFont(30f);
-        Font font10 = Fonts.getFont("thai.ttf").deriveFont(30f);
-        Font font11 = Fonts.getFont("arabic.ttf").deriveFont(30f);
-        Font font12 = Fonts.getFont("jp.ttf").deriveFont(30f);
+    public EmojiFont(float size) {
+        Font font1 = Fonts.getFont("monorale.ttf").deriveFont(size);
+        Font font2 = Fonts.getFont("regular.ttf").deriveFont(size);
+        Font font3 = Fonts.getFont("symbol.ttf").deriveFont(size);
+        Font font4 = Fonts.getFont("symbol2.ttf").deriveFont(size);
+        Font font5 = Fonts.getFont("math.ttf").deriveFont(size);
+        Font font7 = Fonts.getFont("emoji.ttf").deriveFont(size);
+        Font font6 = Fonts.getFont("music.ttf").deriveFont(size);
+        Font font9 = Fonts.getFont("tamil.ttf").deriveFont(size);
+        Font font10 = Fonts.getFont("thai.ttf").deriveFont(size);
+        Font font11 = Fonts.getFont("arabic.ttf").deriveFont(size);
+        Font font12 = Fonts.getFont("jp.ttf").deriveFont(size);
 
 
         this.fonts = new ArrayList<>();
@@ -73,6 +73,7 @@ public class EmojiFont {
         g.setFont(fonts.get(1));
         FontMetrics fontMetrics = g.getFontMetrics();
         FONT_HEIGHT = fontMetrics.getHeight();
+        System.out.println("EMOJI FONT HEIGHT: "+FONT_HEIGHT);
         int x = 50, y = 50;
         int total = 0;
         String valid = "✫━❤✰✳☠⬜☮⚔☯➤⚠?❣✼Ω✶♤•⬛✷⇦♧▶✙❋♡❘♢☬✴♔♕♚♛★☆✮✯☾☽☼☻۞۩εїзƸ̵̡Ӝ̨̄➲ƷξЖЗж☏¢☚☛☜☞☟☢☣๑❀✿ψ♆☪♪♩♫♬✄✆✦✧♱♰∞♂♀☿❥❦❧™®©✖✗✘■□▢▲△▼▽◆◇○◎●◯Δ◕◔ʊϟツ回₪¿¡½⅓⅔¼¾⅛⅜⅝⅞℅№⇨❝❞#&℃∃∧∠∨∩⊂⊃∪⊥∀ΞΓɐəɘβɟɥɯɔи๏ɹʁяʌʍλчΣΠ➀➁➂➃➄➅➆➇➈➉{｡^‿()☭℘ℑℜℵηα◠◡╭╮╯╰⊙¤㊣▆▇█▓〓≡╝╚╔╗╬═╓╩┠┨┯┷┏┓┗┛┳﹃﹄┌┐└┘∟「」↑↓→←↘↙┇┅﹉﹊﹍﹎*_-︵∵∴‖︱︳︴﹏﹋﹌►◄▧▨◐◑↔↕▪▫▀▄▌▐░▒▬◊◦▣▤▥▦▩ぃ◘◙◈♭のあ￡✎✟ஐ≈.✲❈➹~【】┱┲✚✪✣✤✥❉❃❂❁✓✔✕㊚㊛:ﾟ‘･▁▂▃▅⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⋲⋳⋴⋵⋶⋷⋸⋹⋺⋻⋼⋽⋾⋿⌀⌁⌂⌃⌄⌅⌆⌇⌈⌉";

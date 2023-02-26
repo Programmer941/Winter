@@ -3,8 +3,6 @@ package com.winterclient.data;
 import com.google.gson.*;
 import com.winterclient.account.Account;
 import com.winterclient.auth.AccountAuthenticator;
-import com.winterclient.gui.screens.MainMenu;
-import net.minecraft.client.Minecraft;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,14 +15,15 @@ public class AccountManager {
 
     public Account activeAccount = null;
 
-    public boolean pendingNewAccount = false;
-    public Account pendingAccount;
+    public boolean pendingNewAccounts = false;
+    public List<Account> pendingAccounts;
 
     File dataFolder;
     File accountsFile;
 
     public AccountManager() {
         accountList = new ArrayList<Account>();
+        pendingAccounts = new ArrayList<Account>();
         dataFolder = new File("Winter");
         if (!dataFolder.exists())
             dataFolder.mkdir();
@@ -125,8 +124,8 @@ public class AccountManager {
             a.getAccessToken(token);
             if(a.success){
                 Account newAccount = new Account(a.saveName, a.saveUUID, a.saveMinecraftToken, a.saveRefreshToken, a.saveExpiration);
-                pendingNewAccount=true;
-                pendingAccount=newAccount;
+                pendingNewAccounts =true;
+                pendingAccounts.add(newAccount);
             }
         }).start();
 

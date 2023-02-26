@@ -41,6 +41,8 @@ public class Scoreboard extends HUDMod {
     public void onRenderOverlay(OverlayEvent o) {
         int offset=580;
         Winter.instance.blurShader.renderBlur(x,y,width,height,9);
+        if(objective==null)
+            return;
 
         net.minecraft.scoreboard.Scoreboard scoreboard = objective.getScoreboard();
         Collection<Score> collection = scoreboard.getSortedScores(objective);
@@ -94,12 +96,12 @@ public class Scoreboard extends HUDMod {
             {
                 String s3 = objective.getDisplayName();
                 if(s3.contains("SKYBLOCK")){
-//                    mc.thePlayer.sendChatMessage("/l");
-//                    try {
-//                        Thread.sleep(3000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+                    mc.thePlayer.sendChatMessage("/l");
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 //                    this.mc.theWorld.sendQuittingDisconnectingPacket();
 //                    this.mc.loadWorld(null);
 //                    this.mc.displayGuiScreen(new Multiplayer());

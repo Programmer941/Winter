@@ -1,6 +1,7 @@
 package com.winterclient.gui.screens;
 
 import com.winterclient.Winter;
+import com.winterclient.account.Account;
 import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.*;
@@ -8,12 +9,8 @@ import com.winterclient.gui.elements.Button;
 import com.winterclient.gui.shader.implementations.BlurShader;
 import com.winterclient.gui.util.resources.Fonts;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiSelectWorld;
-
-import java.awt.*;
 
 public class MainMenu extends WinterGuiScreen {
 
@@ -48,7 +45,7 @@ public class MainMenu extends WinterGuiScreen {
         addElement(new PlayButton("Singleplayer",60,height/2-60-25,300,60){
             @Override
             public void onClick(int mouseX, int mouseY, int mouseButton) {
-                mc.displayGuiScreen(new GuiSelectWorld(mc.currentScreen));
+                mc.displayGuiScreen(new Singleplayer());
             }
         });
         addElement(new PlayButton("Multiplayer",60,height/2+25,300,60){
@@ -82,16 +79,19 @@ public class MainMenu extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-
+        Fonts.mcFont.drawString("HI PLEASE BE CENTERED ⊥ ∀ Ξ Γ ɐ ə ɘ ε β ɟ ɥ ɯ ɔ и ๏ ɹ ʁ я ʌ ʍ λ ч ∞ Σ Π➀ ➁ ➂ ➃ ➄ ➅ ➆ ➇ ➈ ➉Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ ⓘ ⓙ ⓚ ⓛ ⓜ ⓝ ⓞ ⓟ", 50,150,-1,false);
     }
 
     @Override
     public void update() {
-        if(Winter.instance.accountManager.pendingNewAccount){
-            Winter.instance.accountManager.pendingAccount.createAvatar();
-            Winter.instance.accountManager.accountList.add(Winter.instance.accountManager.pendingAccount);
-            Winter.instance.accountManager.activeAccount=Winter.instance.accountManager.pendingAccount;
-            Winter.instance.accountManager.pendingNewAccount=false;
+        if(Winter.instance.accountManager.pendingNewAccounts){
+            for(Account pendingAccount : Winter.instance.accountManager.pendingAccounts){
+                pendingAccount.createAvatar();
+                Winter.instance.accountManager.accountList.add(pendingAccount);
+                Winter.instance.accountManager.setActiveAccount(pendingAccount);
+            }
+
+            Winter.instance.accountManager.pendingNewAccounts =false;
             Minecraft.getMinecraft().displayGuiScreen(this);
         }
     }

@@ -34,6 +34,10 @@ public class Account {
         }
     }
 
+    public boolean isExpired(){
+        return System.currentTimeMillis()-expirationTime < 7200000;
+    }
+
     public Session getSession(){
         return new Session(name,uuid,accessToken,"Xbox");
     }

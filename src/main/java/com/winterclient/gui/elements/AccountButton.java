@@ -50,7 +50,7 @@ public class AccountButton extends WinterGuiElement {
 
     @Override
     public void onClick(int mouseX, int mouseY, int mouseButton) {
-        Winter.instance.accountManager.activeAccount = account;
+        Winter.instance.accountManager.setActiveAccount(account);
         System.out.println("set active session to: " + account.name);
     }
 

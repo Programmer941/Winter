@@ -23,8 +23,8 @@ public class ModManager {
         addMod(new PotionEffects(20,300,150,300));
         addMod(new Chat(100,100,800,500));
         addMod(new Scoreboard(700,400,300,580));
-        addMod(new TestMod());
-        addMod(new TestMod());
+        addMod(new ClickDelay(500,30,100,50));
+        addMod(new Crosshair());
         addMod(new TestMod());
         addMod(new TestMod());
         addMod(new TestMod());

@@ -2,6 +2,7 @@ package com.winterclient.gui.screens;
 
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.TextButton;
+import com.winterclient.gui.elements.settingElements.NumberSelectObject;
 import net.minecraft.client.Minecraft;
 
 public class OverlayMenu extends WinterGuiScreen {
@@ -28,6 +29,7 @@ public class OverlayMenu extends WinterGuiScreen {
                 Minecraft.getMinecraft().displayGuiScreen(new ChatEvents());
             }
         });
+        addElement(new NumberSelectObject(0,0,0,10,10));
     }
 
     @Override

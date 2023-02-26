@@ -5,6 +5,7 @@ import com.winterclient.event.implementations.OverlayEvent;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
+import com.winterclient.mod.implementations.Crosshair;
 import com.winterclient.mod.implementations.Scoreboard;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -36,11 +37,31 @@ public class MixinGuiInGame {
         Scoreboard.instance.objective=objective;
     }
 
-
     @Inject(method = "renderGameOverlay", at = @At("TAIL"))
     public void renderGameOverlay(float partialTicks, CallbackInfo callbackInfo) {
         Winter.instance.eventBus.fire(new OverlayEvent());
     }
+
+    @Overwrite
+    protected boolean showCrosshair(){
+        Minecraft mc = Minecraft.getMinecraft();
+        if (mc.gameSettings.showDebugInfo && !mc.thePlayer.hasReducedDebug() && !mc.gameSettings.reducedDebugInfo)
+            return false;
+        if(mc.thePlayer.isSpectator())
+            return false;
+        if(mc.currentScreen != null)
+            return false;
+        if(Crosshair.custom){
+            GL11.glPushMatrix();
+            Images.crosshair.draw(mc.displayWidth/2-12,mc.displayHeight/2-12,24,24);
+            GL11.glPopMatrix();
+            Minecraft.getMinecraft().getTextureManager().bindTexture(Gui.icons);
+            return false;
+        }
+
+        return true;
+    }
+
 
     @Overwrite
     public void renderTooltip(ScaledResolution sr, float partialTicks) {

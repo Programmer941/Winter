@@ -14,6 +14,8 @@ public class Mod {
 
     public Minecraft mc = Minecraft.getMinecraft();
 
+    public static Mod instance;
+
     public String name;
     public String description;
     public Category category;
@@ -27,8 +29,9 @@ public class Mod {
         description = info.description();
         category = info.category();
         setEnabled(info.enabled());
-
         settings=new ArrayList<>();
+
+        instance = this;
     }
 
     public void toggle(){
