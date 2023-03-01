@@ -21,11 +21,17 @@ public class EmojiFont {
     protected DefaultImage fontImage;
     public CharData[] charDatas = new CharData[Character.MAX_VALUE];
     public int FONT_HEIGHT;
-    public int padding;
+    public int padding = 10;
+    private int ascent;
+    private int charHeight;
+    private float size;
     int totalFonts;
     int currentFont = 0;
 
-    public EmojiFont(float size) {
+    public EmojiFont(float size,int height) {
+        System.out.println(height);
+        this.size=size;
+        charHeight=height;
         Font font1 = Fonts.getFont("monorale.ttf").deriveFont(size);
         Font font2 = Fonts.getFont("regular.ttf").deriveFont(size);
         Font font3 = Fonts.getFont("symbol.ttf").deriveFont(size);
@@ -63,7 +69,7 @@ public class EmojiFont {
         height = 1200;
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) bufferedImage.getGraphics();
-        g.setColor(new Color(255, 255, 255, 0));
+        g.setColor(new Color(45, 41, 41, 0));
         g.fillRect(0, 0, width, height);
         g.setColor(Color.WHITE);
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -73,18 +79,19 @@ public class EmojiFont {
         g.setFont(fonts.get(1));
         FontMetrics fontMetrics = g.getFontMetrics();
         FONT_HEIGHT = fontMetrics.getHeight();
-        System.out.println("EMOJI FONT HEIGHT: "+FONT_HEIGHT);
-        int x = 50, y = 50;
+        System.out.println(FONT_HEIGHT);
+        ascent=fontMetrics.getAscent();
+        System.out.println(ascent);
+        int x = padding, y = ascent;
+
         int total = 0;
-        String valid = "✫━❤✰✳☠⬜☮⚔☯➤⚠?❣✼Ω✶♤•⬛✷⇦♧▶✙❋♡❘♢☬✴♔♕♚♛★☆✮✯☾☽☼☻۞۩εїзƸ̵̡Ӝ̨̄➲ƷξЖЗж☏¢☚☛☜☞☟☢☣๑❀✿ψ♆☪♪♩♫♬✄✆✦✧♱♰∞♂♀☿❥❦❧™®©✖✗✘■□▢▲△▼▽◆◇○◎●◯Δ◕◔ʊϟツ回₪¿¡½⅓⅔¼¾⅛⅜⅝⅞℅№⇨❝❞#&℃∃∧∠∨∩⊂⊃∪⊥∀ΞΓɐəɘβɟɥɯɔи๏ɹʁяʌʍλчΣΠ➀➁➂➃➄➅➆➇➈➉{｡^‿()☭℘ℑℜℵηα◠◡╭╮╯╰⊙¤㊣▆▇█▓〓≡╝╚╔╗╬═╓╩┠┨┯┷┏┓┗┛┳﹃﹄┌┐└┘∟「」↑↓→←↘↙┇┅﹉﹊﹍﹎*_-︵∵∴‖︱︳︴﹏﹋﹌►◄▧▨◐◑↔↕▪▫▀▄▌▐░▒▬◊◦▣▤▥▦▩ぃ◘◙◈♭のあ￡✎✟ஐ≈.✲❈➹~【】┱┲✚✪✣✤✥❉❃❂❁✓✔✕㊚㊛:ﾟ‘･▁▂▃▅⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⋲⋳⋴⋵⋶⋷⋸⋹⋺⋻⋼⋽⋾⋿⌀⌁⌂⌃⌄⌅⌆⌇⌈⌉";
-        int lineHeight = 0;
+        String valid = "✫━❤✰✳☠⬜☮⚔☯➤⚠?❣✼Ω✶♤•⬛✷⇦♧▶✙❋♡❘♢☬✴♔♕♚♛★☆✮✯☾☽☼☻۞۩εїƸӜз➲ƷξЖЗж☏¢☚☛☜☞☟☢☣๑❀✿ψ♆☪♪♩♫♬✄✆✦✧♱♰∞♂♀☿❥❦❧™®©✖✗✘■□▢▲△▼▽◆◇○◎●◯Δ◕◔ʊϟツ回₪¿¡½⅓⅔¼¾⅛⅜⅝⅞℅№⇨❝❞#&℃∃∧∠∨∩⊂⊃∪⊥∀ΞΓɐəɘβɟɥɯɔи๏ɹʁяʌʍλчΣΠ➀➁➂➃➄➅➆➇➈➉{｡^‿()☭℘ℑℜℵηα◠◡╭╮╯╰⊙¤㊣▆▇█▓〓≡╝╚╔╗╬═╓╩┠┨┯┷┏┓┗┛┳﹃﹄┌┐└┘∟「」↑↓→←↘↙┇┅﹉﹊﹍﹎*_-︵∵∴‖︱︳︴﹏﹋﹌►◄▧▨◐◑↔↕▪▫▀▄▌▐░▒▬◊◦▣▤▥▦▩ぃ◘◙◈♭のあ￡✎✟ஐ≈.✲❈➹~【】┱┲✚✪✣✤✥❉❃❂❁✓✔✕㊚㊛:ﾟ‘･▁▂▃▅⊮⊯⊰⊱⊲⊳⊴⊵⊶⊷⊸⊹⊺⊻⊼⊽⊾⊿⋀⋁⋂⋃⋄⋅⋆⋇⋈⋉⋊⋋⋌⋍⋎⋏⋐⋑⋒⋓⋔⋕⋖⋗⋘⋙⋚⋛⋜⋝⋞⋟⋠⋡⋢⋣⋤⋥⋦⋧⋨⋩⋪⋫⋬⋭⋮⋯⋰⋱⋲⋳⋴⋵⋶⋷⋸⋹⋺⋻⋼⋽⋾⋿⌀⌁⌂⌃⌄⌅⌆⌇⌈⌉";
         for (int i = 0; i < Character.MAX_VALUE; i++) {
             char c = (char) i;
 
             if (x > 1150) {
-                x = 0;
-                y += lineHeight;
-                lineHeight = 0;
+                x = padding;
+                y += FONT_HEIGHT;
             }
             if (valid.indexOf(c) >= 0 && c>256) {
                 for (int e = 0; e < fonts.size(); e++) {
@@ -95,15 +102,12 @@ public class EmojiFont {
                             Rectangle2D dimensions = fontMetrics.getStringBounds(String.valueOf(c), g);
                             CharData charData = new CharData();
                             charData.width = dimensions.getBounds().width;
-                            charData.height = 37;
-                            if (charData.height > lineHeight) {
-                                lineHeight = charData.height+1;
-                            }
+                            charData.height = charHeight;
                             charData.x = x;
                             charData.y = y;
                             this.charDatas[i] = charData;
 
-                            x += charData.width;
+                            x += charData.width+padding;
 
                             g.drawString(String.valueOf(c), charData.x, charData.y);
                             total += 1;
@@ -129,7 +133,7 @@ public class EmojiFont {
 
     public int drawChar(char c, int x, int y, Color color) {
         CharData ch = this.charDatas[c];
-        fontImage.draw(x, y, ch.width, ch.height, ch.x, ch.y - 21 - 8, ch.width, ch.height, color);
+        fontImage.draw(x, y, ch.width, ch.height, ch.x, ch.y-ascent+(int) size/8, ch.width, ch.height, color);
         return ch.width;
     }
 

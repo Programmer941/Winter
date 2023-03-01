@@ -35,7 +35,7 @@ public class WinterGuiFont {
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) bufferedImage.getGraphics();
         g.setFont(font);
-        g.setColor(new Color(255, 255, 255, 0));
+        g.setColor(new Color(71, 71, 71, 0));
         g.fillRect(0, 0, width, height);
         g.setColor(Color.WHITE);
         g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -44,7 +44,6 @@ public class WinterGuiFont {
         g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         FontMetrics fontMetrics = g.getFontMetrics();
         FONT_HEIGHT = fontMetrics.getHeight();
-        System.out.println(FONT_HEIGHT+ "FONT HEIGHT");
         int x=0,y=0;
         for (int i = 0; i < 256; i++) {
             char c = (char) i;

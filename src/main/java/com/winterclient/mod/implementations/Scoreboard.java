@@ -39,7 +39,7 @@ public class Scoreboard extends HUDMod {
 
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
-        int offset=580;
+        int offset=height;
         Winter.instance.blurShader.renderBlur(x,y,width,height,9);
         if(objective==null)
             return;
@@ -77,7 +77,7 @@ public class Scoreboard extends HUDMod {
         int k1 = 3;
         int l1 = x;
         int j = 0;
-        int difference = offset-(i1+40);
+        int difference = offset-(i1+Fonts.mcFont.FONT_HEIGHT);
         offset-=difference/2;
         for (Score score1 : collection)
         {

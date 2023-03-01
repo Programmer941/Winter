@@ -17,7 +17,7 @@ public class ClickDelay extends HUDMod {
     public static ClickDelay instance;
 
     public int clicksCanceled;
-    public boolean clickDelayOff=false;
+    public boolean clickDelayOff=true;
     public ClickDelay(int x, int y, int width, int height) {
         super(x, y, width, height, true);
         instance=this;

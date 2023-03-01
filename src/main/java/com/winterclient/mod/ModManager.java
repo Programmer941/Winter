@@ -22,7 +22,7 @@ public class ModManager {
         addMod(new Ping(280,20,100,50));
         addMod(new PotionEffects(20,300,150,300));
         addMod(new Chat(100,100,800,500));
-        addMod(new Scoreboard(700,400,300,580));
+        addMod(new Scoreboard(700,400,320,480));
         addMod(new ClickDelay(500,30,100,50));
         addMod(new Crosshair());
         addMod(new TestMod());

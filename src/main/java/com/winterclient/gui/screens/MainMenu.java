@@ -79,7 +79,7 @@ public class MainMenu extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        Fonts.mcFont.drawString("HI PLEASE BE CENTERED ⊥ ∀ Ξ Γ ɐ ə ɘ ε β ɟ ɥ ɯ ɔ и ๏ ɹ ʁ я ʌ ʍ λ ч ∞ Σ Π➀ ➁ ➂ ➃ ➄ ➅ ➆ ➇ ➈ ➉Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩⓐ ⓑ ⓒ ⓓ ⓔ ⓕ ⓖ ⓗ ⓘ ⓙ ⓚ ⓛ ⓜ ⓝ ⓞ ⓟ", 50,150,-1,false);
+        Fonts.mcFont.drawString("HI PLEASE BE CENTEREDΞΓɐəɘβɟɥɯɔи๏ɹʁяʌʍλ★☆✮✯☾☽☼☣๑❀✿ψ♆☪♪♩♫♬✄✆✦✧♱☻۞۩εчΣΠ", 50,150,-1,false);
     }
 
     @Override

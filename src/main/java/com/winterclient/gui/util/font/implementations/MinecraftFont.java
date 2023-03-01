@@ -27,9 +27,9 @@ public class MinecraftFont {
         boldFont = new DefaultFont(font.deriveFont(Font.BOLD));
         italicFont = new DefaultFont(font.deriveFont(Font.ITALIC));
         boldItalicFont = new DefaultFont(font.deriveFont(Font.BOLD + Font.ITALIC));
-        emojiFont = new EmojiFont(font.getSize());
         activeFont = regularFont;
         FONT_HEIGHT=activeFont.FONT_HEIGHT;
+        emojiFont = new EmojiFont(font.getSize(),FONT_HEIGHT);
         setupMinecraftColorCodes();
     }
 
