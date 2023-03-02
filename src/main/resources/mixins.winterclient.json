@@ -18,6 +18,7 @@
     "MixinEntityLivingBase",
     "MixinItemModelGenerator",
     "MixinEntityPlayer",
-    "MixinEntityPlayerSP"
+    "MixinEntityPlayerSP",
+    "MixinPlayerUsageSnooper"
   ]
 }

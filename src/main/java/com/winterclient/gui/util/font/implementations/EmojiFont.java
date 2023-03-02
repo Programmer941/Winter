@@ -29,7 +29,6 @@ public class EmojiFont {
     int currentFont = 0;
 
     public EmojiFont(float size,int height) {
-        System.out.println(height);
         this.size=size;
         charHeight=height;
         Font font1 = Fonts.getFont("monorale.ttf").deriveFont(size);
@@ -79,9 +78,7 @@ public class EmojiFont {
         g.setFont(fonts.get(1));
         FontMetrics fontMetrics = g.getFontMetrics();
         FONT_HEIGHT = fontMetrics.getHeight();
-        System.out.println(FONT_HEIGHT);
         ascent=fontMetrics.getAscent();
-        System.out.println(ascent);
         int x = padding, y = ascent;
 
         int total = 0;

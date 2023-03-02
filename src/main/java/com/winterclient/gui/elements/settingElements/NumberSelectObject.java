@@ -15,7 +15,7 @@ public class NumberSelectObject extends WinterGuiElement {
         super(x, y, 830, 60);
         selectableNumbers=new ArrayList<>();
         for(int i=0;i<boxes;i++){
-            float currentNumber = (end-start)/boxes*i;
+            float currentNumber = (end-start)/ (float) (boxes-1) *  (float) (i);
             selectableNumbers.add(currentNumber);
         }
     }
@@ -26,7 +26,10 @@ public class NumberSelectObject extends WinterGuiElement {
         int xOffset=0;
         for (int i=0;i<selectableNumbers.size();i++){
             RenderUtil.drawRect(x+xOffset+5,y+5,50,50,new Color(0x90000000,true));
-            Fonts.ralewaySmall.drawCenteredString(String.valueOf(selectableNumbers.get(i)).substring(0,3),x+xOffset+50/2+5,y+25-Fonts.ralewaySmall.FONT_HEIGHT/2+5);
+            int index=3;
+            if(selectableNumbers.get(i).toString().charAt(2)=='.')
+                index=2;
+            Fonts.ralewaySmall.drawCenteredString(String.valueOf(selectableNumbers.get(i)).substring(0,index),x+xOffset+50/2+5,y+25-Fonts.ralewaySmall.FONT_HEIGHT/2+5);
             xOffset+=60;
         }
     }

@@ -47,7 +47,7 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (AccessToken): " + response.getBody());
+            //System.out.println("Success (AccessToken): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String accessToken = data.getString("access_token");
             String refresh_token = data.getString("refresh_token");
@@ -72,7 +72,7 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (AccessToken): " + response.getBody());
+            //System.out.println("Success (AccessToken): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String accessToken = data.getString("access_token");
             String refresh_token = data.getString("refresh_token");
@@ -111,7 +111,7 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (xboxLiveToken): " + response.getBody());
+            //System.out.println("Success (xboxLiveToken): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String token = data.getString("Token");
             JSONObject uhsJson = (JSONObject) data.getJSONObject("DisplayClaims").getJSONArray("xui").get(0);
@@ -152,7 +152,7 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (XSTSToken): " + response.getBody());
+            //System.out.println("Success (XSTSToken): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String token = data.getString("Token");
             getMinecraftToken(saveUHS, token);
@@ -182,7 +182,7 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (MinecraftToken): " + response.getBody());
+            //System.out.println("Success (MinecraftToken): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String token = data.getString("access_token");
             saveMinecraftToken = token;
@@ -201,7 +201,7 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (checkAccount): " + response.getBody());
+            //System.out.println("Success (checkAccount): " + response.getBody());
             getProfile(minecraftToken);
         } else {
             System.out.println("Error: Couldn't check Account!");
@@ -218,13 +218,12 @@ public class AccountAuthenticator {
                 .asJson();
 
         if (response.isSuccess()) {
-            System.out.println("Success (Get Profile): " + response.getBody());
+            //System.out.println("Success (Get Profile): " + response.getBody());
             JSONObject data = response.getBody().getObject();
             String uuid = data.getString("id");
             String name = data.getString("name");
             saveUUID = uuid;
             saveName = name;
-            System.out.println(saveUUID + " " + saveName);
             success=true;
         } else {
             System.out.println("Error: Couldn't get profile!");

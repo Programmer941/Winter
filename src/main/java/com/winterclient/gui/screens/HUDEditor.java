@@ -17,13 +17,11 @@ public class HUDEditor extends WinterGuiScreen {
     int offsetY;
     @Override
     public void init() {
-        System.out.println("hi");
         drawBackground=false;
         HUDMods=new ArrayList<HUDMod>();
         Winter.instance.modManager.getModules().forEach(mod -> {
             if(mod instanceof HUDMod && mod.enabled){
                 HUDMods.add((HUDMod) mod);
-                System.out.println(mod.name);
             }
         });
     }

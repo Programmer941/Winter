@@ -21,12 +21,9 @@ public class ModSettingMenu extends WinterGuiScreen {
     @Override
     public void init() {
         drawBackground=false;
-        System.out.println(mod.settings.size());
         mod.settings.forEach(setting -> {
-            System.out.println(setting.name);
             if (setting instanceof BooleanSetting){
                 addElement(new BooleanButton(setting.name,width/2-415+10,height/2-235+10,240,60, (BooleanSetting) setting));
-                System.out.println("ADDED SETTING");
             }
         });
     }

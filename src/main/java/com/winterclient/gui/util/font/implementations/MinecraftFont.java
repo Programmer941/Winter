@@ -21,8 +21,10 @@ public class MinecraftFont {
     DefaultFont activeFont;
 
     public int FONT_HEIGHT;
+    private int size;
 
     public MinecraftFont(Font font) {
+        size=font.getSize();
         regularFont = new DefaultFont(font.deriveFont(Font.PLAIN));
         boldFont = new DefaultFont(font.deriveFont(Font.BOLD));
         italicFont = new DefaultFont(font.deriveFont(Font.ITALIC));
@@ -151,7 +153,7 @@ public class MinecraftFont {
                         RenderUtil.drawLine(x, y + emojiFont.FONT_HEIGHT, x - width, y + emojiFont.FONT_HEIGHT, 2, currentColor);
                 } else {
                     //System.out.println(character+" "+(int) character);
-                    int scale = 3;
+                    int scale = size/16;
                     StringBuilder formattedString = new StringBuilder();
                     if (randomCase)
                         formattedString.append("§k");
@@ -161,11 +163,10 @@ public class MinecraftFont {
                         formattedString.append("§o");
                     formattedString.append(character);
                     GL11.glPushMatrix();
-                    GL11.glTranslatef(x, y + 6, 1);
+                    GL11.glTranslatef(x, y, 1);
                     GL11.glScalef(scale, scale, 1);
-                    GL11.glTranslatef(-x, -y - 6, 1);
-
-                    Minecraft.getMinecraft().fontRendererObj.drawString(formattedString.toString(), x, y + 6, currentColor.getRGB(), true);
+                    GL11.glTranslatef(-x, -y, 1);
+                    Minecraft.getMinecraft().fontRendererObj.drawString(formattedString.toString(), x, y+4, currentColor.getRGB(), true);
                     GL11.glPopMatrix();
                     int width = Minecraft.getMinecraft().fontRendererObj.getStringWidth(formattedString.toString());
                     x += width * 3;
@@ -179,8 +180,8 @@ public class MinecraftFont {
     }
 
     public ArrayList<String> wrapString(String s, int maxSize) {
-        if (s.contains("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")) {
-            s = s.replace("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬", "▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
+        if (s.contains("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")) {
+            s = s.replace("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬", "▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
         }
 
         ArrayList<String> returnArray = new ArrayList<String>();

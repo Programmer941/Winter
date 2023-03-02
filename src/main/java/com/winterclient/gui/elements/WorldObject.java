@@ -1,11 +1,14 @@
 package com.winterclient.gui.elements;
 
 import com.winterclient.gui.core.WinterGuiElement;
+import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.WorldSettings;
 import net.minecraft.world.storage.SaveFormatComparator;
+
+import java.awt.*;
 
 public class WorldObject extends WinterGuiElement {
 
@@ -17,8 +20,8 @@ public class WorldObject extends WinterGuiElement {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        Images.drop.draw(x,y,width,height);
-        Fonts.raleway.drawCenteredString(world.getDisplayName(),x+width/2,y+5);
+        RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
+        Fonts.raleway.drawCenteredString(world.getDisplayName(),x+width/2,y+height/2-Fonts.raleway.FONT_HEIGHT/2);
     }
 
     @Override

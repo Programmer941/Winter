@@ -63,7 +63,6 @@ public class ChatEvents extends WinterGuiScreen {
                 if (offset > 0) {
                     int index = offset / 30;
                     if (index > 14) index = 14;
-                    System.out.println(index);
                     this.handleComponentClick(chat.messages.get(chat.messages.size() - 1 - index).iChatComponent);
                 }
             }

@@ -41,7 +41,6 @@ public class BorrowLunarAccounts {
                 String id = profile.get("id").getAsString();
                 String accessToken=accountJsonObject.get("accessToken").getAsString();
                 String refreshToken=accountJsonObject.get("refreshToken").getAsString();
-                System.out.println(id + "USER NAME  AS DSA "+accessToken);
                 Account a = new Account(name,id,accessToken,refreshToken,9999l);
                 a.createAvatar();
                 Winter.instance.accountManager.accountList.add(a);

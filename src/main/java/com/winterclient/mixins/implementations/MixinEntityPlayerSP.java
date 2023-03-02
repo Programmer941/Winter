@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EntityPlayerSP.class)
 public class MixinEntityPlayerSP {
 
-    @Inject(method = "damageEntity", at = @At("HEAD"), cancellable = true)
-    public void damageEntity(DamageSource damageSrc, float damageAmount, CallbackInfo callbackinfo)
-    {
-        System.out.println("HI");
-    }
+//    @Inject(method = "damageEntity", at = @At("HEAD"), cancellable = true)
+//    public void damageEntity(DamageSource damageSrc, float damageAmount, CallbackInfo callbackinfo)
+//    {
+//        System.out.println("HI");
+//    }
 }

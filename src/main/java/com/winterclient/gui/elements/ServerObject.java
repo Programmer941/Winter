@@ -30,15 +30,15 @@ public class ServerObject extends WinterGuiElement {
     public void draw(int mouseX, int mouseY) {
 //        if(this.mouseInBounds(mouseX,mouseY))
 //            RenderUtil.drawRect(x+5,y+5,width-10,height-10,new Color(0x90000000,true));
-        Images.drop.draw(x,y,width,height);
+        RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
         //RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
         Fonts.raleway.drawCenteredString(name,x+width/2,y+5);
         if(description!=null){
             String str1 = description.get(0).replaceAll("  +", "");
-            Fonts.mcFont.drawCenteredString(str1,x+width/2,y+40);
+            Fonts.mcFont.drawCenteredString(str1,x+width/2,y+47);
 
             if(description.size()>1)
-            Fonts.mcFont.drawCenteredString(description.get(1).replaceAll("  +", ""),x+width/2,y+75);
+            Fonts.mcFont.drawCenteredString(description.get(1).replaceAll("  +", ""),x+width/2,y+81);
 
         }else{
             //Fonts.mcFont.drawString(serverData.serverMOTD,x+5,y+45,-1,false);

@@ -15,59 +15,59 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ScaledResolution.class)
 public class MixinScaledResolution {
 
-//    @Inject(method = "getScaledWidth", at = @At("HEAD"), cancellable = true)
-//    public void getScaledWidth(CallbackInfoReturnable<Integer> cir){
-//        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen || Mine)
-//            cir.setReturnValue(Minecraft.getMinecraft().displayWidth);
-//    }
-//
-//    @Inject(method = "getScaledHeight", at = @At("HEAD"), cancellable = true)
-//    public void getScaledHeight(CallbackInfoReturnable<Integer> cir){
-//        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
-//            cir.setReturnValue(Minecraft.getMinecraft().displayHeight);
-//    }
-//
-//    @Inject(method = "getScaledWidth_double", at = @At("HEAD"), cancellable = true)
-//    public void getScaledWidth_double(CallbackInfoReturnable<Double> cir){
-//        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
-//            cir.setReturnValue((double) Minecraft.getMinecraft().displayWidth);
-//    }
-//
-//    @Inject(method = "getScaledHeight_double", at = @At("HEAD"), cancellable = true)
-//    public void getScaledHeight_double(CallbackInfoReturnable<Double> cir){
-//        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
-//            cir.setReturnValue((double) Minecraft.getMinecraft().displayHeight);
-//    }
-//
-//    @Inject(method = "getScaleFactor", at = @At("HEAD"), cancellable = true)
-//    public void getScaleFactor(CallbackInfoReturnable<Integer> cir){
-//        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
-//            cir.setReturnValue(1);
-//    }
+    @Inject(method = "getScaledWidth", at = @At("HEAD"), cancellable = true)
+    public void getScaledWidth(CallbackInfoReturnable<Integer> cir){
+        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
+            cir.setReturnValue(Minecraft.getMinecraft().displayWidth);
+    }
 
-    @Overwrite
-    public int getScaledWidth()
-    {
-        return Display.getWidth();
+    @Inject(method = "getScaledHeight", at = @At("HEAD"), cancellable = true)
+    public void getScaledHeight(CallbackInfoReturnable<Integer> cir){
+        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
+            cir.setReturnValue(Minecraft.getMinecraft().displayHeight);
     }
-    @Overwrite
-    public int getScaledHeight()
-    {
-        return Display.getHeight();
+
+    @Inject(method = "getScaledWidth_double", at = @At("HEAD"), cancellable = true)
+    public void getScaledWidth_double(CallbackInfoReturnable<Double> cir){
+        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
+            cir.setReturnValue((double) Minecraft.getMinecraft().displayWidth);
     }
-    @Overwrite
-    public double getScaledWidth_double()
-    {
-        return Display.getWidth();
+
+    @Inject(method = "getScaledHeight_double", at = @At("HEAD"), cancellable = true)
+    public void getScaledHeight_double(CallbackInfoReturnable<Double> cir){
+        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
+            cir.setReturnValue((double) Minecraft.getMinecraft().displayHeight);
     }
-    @Overwrite
-    public double getScaledHeight_double()
-    {
-        return Display.getHeight();
+
+    @Inject(method = "getScaleFactor", at = @At("HEAD"), cancellable = true)
+    public void getScaleFactor(CallbackInfoReturnable<Integer> cir){
+        if(Minecraft.getMinecraft().currentScreen instanceof WinterGuiScreen)
+            cir.setReturnValue(1);
     }
-    @Overwrite
-    public int getScaleFactor()
-    {
-        return 1;
-    }
+
+//    @Overwrite
+//    public int getScaledWidth()
+//    {
+//        return Display.getWidth();
+//    }
+//    @Overwrite
+//    public int getScaledHeight()
+//    {
+//        return Display.getHeight();
+//    }
+//    @Overwrite
+//    public double getScaledWidth_double()
+//    {
+//        return Display.getWidth();
+//    }
+//    @Overwrite
+//    public double getScaledHeight_double()
+//    {
+//        return Display.getHeight();
+//    }
+//    @Overwrite
+//    public int getScaleFactor()
+//    {
+//        return 1;
+//    }
 }

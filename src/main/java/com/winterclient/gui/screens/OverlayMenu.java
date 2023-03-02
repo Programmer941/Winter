@@ -29,7 +29,7 @@ public class OverlayMenu extends WinterGuiScreen {
                 Minecraft.getMinecraft().displayGuiScreen(new ChatEvents());
             }
         });
-        addElement(new NumberSelectObject(0,0,0,10,10));
+        addElement(new NumberSelectObject(0,0,0,363,10));
     }
 
     @Override
