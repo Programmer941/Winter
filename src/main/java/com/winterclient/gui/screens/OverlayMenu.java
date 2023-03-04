@@ -1,6 +1,7 @@
 package com.winterclient.gui.screens;
 
 import com.winterclient.gui.core.WinterGuiScreen;
+import com.winterclient.gui.elements.PlayButton;
 import com.winterclient.gui.elements.TextButton;
 import com.winterclient.gui.elements.settingElements.NumberSelectObject;
 import net.minecraft.client.Minecraft;
@@ -27,6 +28,12 @@ public class OverlayMenu extends WinterGuiScreen {
             @Override
             public void onClick(int mouseX, int mouseY, int mouseButton) {
                 Minecraft.getMinecraft().displayGuiScreen(new ChatEvents());
+            }
+        });
+        addElement(new PlayButton("InventroyTest",60,height/2+200,300,60){
+            @Override
+            public void onClick(int mouseX, int mouseY, int mouseButton) {
+                mc.displayGuiScreen(new Inventory());
             }
         });
         addElement(new NumberSelectObject(0,0,0,363,10));
