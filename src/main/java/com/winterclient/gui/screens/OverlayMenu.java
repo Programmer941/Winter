@@ -30,13 +30,13 @@ public class OverlayMenu extends WinterGuiScreen {
                 Minecraft.getMinecraft().displayGuiScreen(new ChatEvents());
             }
         });
-        addElement(new PlayButton("InventroyTest",60,height/2+200,300,60){
-            @Override
-            public void onClick(int mouseX, int mouseY, int mouseButton) {
-                mc.displayGuiScreen(new Inventory());
-            }
-        });
-        addElement(new NumberSelectObject(0,0,0,363,10));
+//        addElement(new PlayButton("InventroyTest",60,height/2+200,300,60){
+//            @Override
+//            public void onClick(int mouseX, int mouseY, int mouseButton) {
+//                mc.displayGuiScreen(new Inventory());
+//            }
+//        });
+//        addElement(new NumberSelectObject(0,0,0,363,10));
     }
 
     @Override

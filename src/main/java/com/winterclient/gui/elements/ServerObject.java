@@ -2,6 +2,7 @@ package com.winterclient.gui.elements;
 
 import com.winterclient.Winter;
 import com.winterclient.gui.core.WinterGuiElement;
+import com.winterclient.gui.screens.Connecting;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
@@ -74,6 +75,7 @@ public class ServerObject extends WinterGuiElement {
 
     private void connectToServer(ServerData server)
     {
-        Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(Minecraft.getMinecraft().currentScreen, Minecraft.getMinecraft(), server));
+        //Minecraft.getMinecraft().displayGuiScreen(new GuiConnecting(Minecraft.getMinecraft().currentScreen, Minecraft.getMinecraft(), server));
+        Minecraft.getMinecraft().displayGuiScreen(new Connecting(server));
     }
 }

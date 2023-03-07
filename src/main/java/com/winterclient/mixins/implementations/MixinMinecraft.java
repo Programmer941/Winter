@@ -4,6 +4,7 @@ import com.winterclient.Winter;
 import com.winterclient.event.implementations.ClickEvent;
 import com.winterclient.event.implementations.KeyEvent;
 import com.winterclient.event.implementations.TickEvent;
+import com.winterclient.gui.screens.Inventory;
 import com.winterclient.gui.screens.OverlayMenu;
 import com.winterclient.mod.implementations.ClickDelay;
 import net.minecraft.client.Minecraft;

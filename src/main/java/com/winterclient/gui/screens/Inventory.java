@@ -2,6 +2,8 @@ package com.winterclient.gui.screens;
 
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.util.RenderUtil;
+import com.winterclient.mixins.implementations.MixinShapelessRecipes;
+import com.winterclient.util.Crafts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -9,16 +11,118 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Inventory extends WinterGuiScreen {
 
+    ArrayList<ItemStack> craftable = new ArrayList<>();
+
     @Override
     public void init() {
-        drawBackground=false;
+
+        drawBackground = false;
+        CraftingManager.getInstance().getRecipeList().forEach(iRecipe -> {
+            if (iRecipe instanceof ShapelessRecipes) {
+                ArrayList<ItemStack> required = new ArrayList<>();
+                ArrayList<Integer> has = new ArrayList<>();
+
+                ShapelessRecipes shapelessRecipes = (ShapelessRecipes) iRecipe;
+                ((MixinShapelessRecipes) shapelessRecipes).getRecipeItems().forEach(itemStack -> {
+                    boolean addItem = true;
+                    for (int e = 0; e < required.size(); e++) {
+                        ItemStack cur = required.get(e);
+                        if (itemStack.getItem().equals(cur.getItem()) && itemStack.getDisplayName().equals(cur.getDisplayName())) {
+                            addItem = false;
+                            cur.stackSize += 1;
+                            required.set(e, cur);
+                        }
+                    }
+                    if (addItem)
+                        required.add(itemStack);
+
+                });
+
+                for (int a = 0; a < required.size(); a++) {
+                    has.add(0);
+                }
+                for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
+                    ItemStack current = mc.thePlayer.inventory.mainInventory[i];
+                    if (current != null)
+                        for (int l = 0; l < required.size(); l++) {
+                            if (current.getItem().equals(required.get(l).getItem()) && current.getDisplayName().equals(required.get(l).getDisplayName())) {
+                                int totalPossible = (int) Math.floor(current.stackSize / required.get(l).stackSize);
+                                has.set(l, has.get(l) + totalPossible);
+                            }
+                        }
+                }
+                int totalCraftable = 99;
+                for (int b = 0; b < has.size(); b++) {
+                    if (has.get(b) < totalCraftable)
+                        totalCraftable = has.get(b);
+                }
+                if (totalCraftable > 0) {
+                    craftable.add(shapelessRecipes.getRecipeOutput());
+                    System.out.println(shapelessRecipes.getRecipeOutput().getDisplayName() + " TOTAL CRAFTABLE: " + totalCraftable);
+                }
+
+            }
+        });
+//        for (Crafts.Shaped shaped : Crafts.shapedArrayList) {
+//            System.out.println("Shaped checked?");
+//            ArrayList<ItemStack> required = new ArrayList<>();
+//            ArrayList<Integer> has = new ArrayList<>();
+//
+//
+//            for (ItemStack recipeItem : shaped.recipeItems) {
+//                boolean addItem = true;
+//                for (int e = 0; e < required.size(); e++) {
+//                    ItemStack cur = required.get(e);
+//                    if(recipeItem!=null)
+//                    if (recipeItem.getItem().equals(cur.getItem())) {
+//                        addItem = false;
+//                        cur.stackSize += 1;
+//                        required.set(e, cur);
+//                    }
+//                }
+//                if (addItem)
+//                    required.add(recipeItem);
+//
+//                for (int a = 0; a < required.size(); a++) {
+//                    has.add(0);
+//                }
+//                for (int i = 0; i < mc.thePlayer.inventory.mainInventory.length; i++) {
+//                    ItemStack current = mc.thePlayer.inventory.mainInventory[i];
+//                    if (current != null)
+//                        for (int l = 0; l < required.size(); l++) {
+//                            if (current.getItem().equals(required.get(l).getItem()) && current.getDisplayName().equals(required.get(l).getDisplayName())) {
+//                                int totalPossible = (int) Math.floor(current.stackSize / required.get(l).stackSize);
+//                                has.set(l, has.get(l) + totalPossible);
+//                            }
+//                        }
+//                }
+//                int totalCraftable = 64;
+//                for (int b = 0; b < has.size(); b++) {
+//                    if (has.get(b) < totalCraftable)
+//                        totalCraftable = has.get(b);
+//                }
+//                if (totalCraftable > 0) {
+//                    craftable.add(shaped.output);
+//                    System.out.println(shaped.output.getDisplayName() + " TOTAL CRAFTABLE: " + totalCraftable);
+//                }
+//            }
+        //}
+
+
+
     }
+
 
     @Override
     public void end() {
@@ -27,44 +131,54 @@ public class Inventory extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        int scale=150;
-        int playerX=width/2-310;
-        int playerY= (int) (height/2+scale*0.535714286f)+60;
-        int inventoryWidth=440;
-        int inventoryHeight=320;
-        drawEntityOnScreen(playerX,playerY, scale,playerX-mouseX,playerY-mouseY-scale*2+scale/3f+6,mc.thePlayer);
+        int scale = 150;
+        int playerX = width / 2 - 310;
+        int playerY = (int) (height / 2 + scale * 0.535714286f) + 60;
+        int inventoryWidth = 440;
+        int inventoryHeight = 320;
+        drawEntityOnScreen(playerX, playerY, scale, playerX - mouseX, playerY - mouseY - scale * 2 + scale / 3f + 6, mc.thePlayer);
         //RenderUtil.drawRect(width/2-inventoryWidth/2,height/2-inventoryHeight/2,inventoryWidth,inventoryHeight,new Color(0x90000000,true));
-        int boxSize=64;
-        int offsetX=width/2-300+scale/2;
-        int offsetY=height/2+boxSize+8;
-        int offsetItem = (boxSize-16*3)/2;
-        System.out.println(Minecraft.getMinecraft().thePlayer.inventory.mainInventory.length);
-        for(int i=0;i<36;i++){
-            int yIndex=(i+1)%9;
+        int boxSize = 64;
+        int offsetX = width / 2 - 300 + scale / 2;
+        int offsetY = height / 2 + boxSize + 8;
+        int offsetItem = (boxSize - 16 * 3) / 2;
+        for (int i = 0; i < 36; i++) {
+            int yIndex = (i + 1) % 9;
             ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.mainInventory[i];
-            RenderUtil.drawRect(offsetX,offsetY,boxSize,boxSize,new Color(0x90000000,true));
+            RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0x90000000, true));
             GL11.glPushMatrix();
             RenderHelper.enableGUIStandardItemLighting();
-            GL11.glTranslatef(offsetX+offsetItem, offsetY+offsetItem, 1);
+            GL11.glTranslatef(offsetX + offsetItem, offsetY + offsetItem, 1);
             GL11.glScalef(3, 3, 1);
-            GL11.glTranslatef(-offsetX-offsetItem, -offsetY-offsetItem, 1);
-            Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(itemstack, offsetX+offsetItem, offsetY+offsetItem);
+            GL11.glTranslatef(-offsetX - offsetItem, -offsetY - offsetItem, 1);
+            Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(itemstack, offsetX + offsetItem, offsetY + offsetItem);
             GL11.glPopMatrix();
-            offsetX+=boxSize+8;
-            if(yIndex==0){
-                offsetY-=boxSize+8;
-                offsetX=width/2-300+scale/2;
+            offsetX += boxSize + 8;
+            if (yIndex == 0) {
+                offsetY -= boxSize + 8;
+                offsetX = width / 2 - 300 + scale / 2;
             }
+        }
+        int craftableX = 100;
+        int craftableY = 100;
+        for (int b = 0; b < craftable.size(); b++) {
+            GL11.glPushMatrix();
+            RenderHelper.enableGUIStandardItemLighting();
+            GL11.glTranslatef(craftableX, craftableY, 1);
+            GL11.glScalef(3, 3, 1);
+            GL11.glTranslatef(-craftableX, -craftableY, 1);
+            Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(craftable.get(b), craftableX, craftableY);
+            GL11.glPopMatrix();
+            craftableX += 90;
         }
     }
 
-    public void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent)
-    {
+    public void drawEntityOnScreen(int posX, int posY, int scale, float mouseX, float mouseY, EntityLivingBase ent) {
         GlStateManager.enableColorMaterial();
         GlStateManager.pushMatrix();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GlStateManager.translate((float)posX, (float)posY, 50.0F);
-        GlStateManager.scale((float)(-scale), (float)scale, (float)scale);
+        GlStateManager.translate((float) posX, (float) posY, 50.0F);
+        GlStateManager.scale((float) (-scale), (float) scale, (float) scale);
         GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
         float f = ent.renderYawOffset;
         float f1 = ent.rotationYaw;
@@ -74,10 +188,10 @@ public class Inventory extends WinterGuiScreen {
         GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
         RenderHelper.enableStandardItemLighting();
         GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(-((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
-        ent.renderYawOffset = (float)Math.atan((double)(mouseX / 40.0F)) * 20.0F;
-        ent.rotationYaw = (float)Math.atan((double)(mouseX / 40.0F)) * 40.0F;
-        ent.rotationPitch = -((float)Math.atan((double)(mouseY / 40.0F))) * 20.0F;
+        GlStateManager.rotate(-((float) Math.atan((double) (mouseY / 40.0F))) * 20.0F, 1.0F, 0.0F, 0.0F);
+        ent.renderYawOffset = (float) Math.atan((double) (mouseX / 40.0F)) * 20.0F;
+        ent.rotationYaw = (float) Math.atan((double) (mouseX / 40.0F)) * 40.0F;
+        ent.rotationPitch = -((float) Math.atan((double) (mouseY / 40.0F))) * 20.0F;
         ent.rotationYawHead = ent.rotationYaw;
         ent.prevRotationYawHead = ent.rotationYaw;
         GlStateManager.translate(0.0F, 0.0F, 0.0F);
@@ -116,6 +230,7 @@ public class Inventory extends WinterGuiScreen {
 
     @Override
     public void type(char typedChar, int keyCode) {
-
+        if(keyCode== Keyboard.KEY_E)
+            Minecraft.getMinecraft().displayGuiScreen(null);
     }
 }

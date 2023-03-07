@@ -73,12 +73,12 @@ public class MainMenu extends WinterGuiScreen {
 //                mc.displayGuiScreen(new GuiMultiplayer(mc.currentScreen));
 //            }
 //        });
-        BooleanElement test = new BooleanElement("booleanTest",new BooleanSetting("booleanSetting",false));
-        NumberElement test2 = new NumberElement("numberTest", new NumberSetting("hiii",3),0,21,10);
-        test.setPositionandSize(100,200);
-        test2.setPositionandSize(100,250);
-        addElement(test);
-        addElement(test2);
+//        BooleanElement test = new BooleanElement("booleanTest",new BooleanSetting("booleanSetting",false));
+//        NumberElement test2 = new NumberElement("numberTest", new NumberSetting("hiii",3),0,21,10);
+//        test.setPositionandSize(100,200);
+//        test2.setPositionandSize(100,250);
+//        addElement(test);
+//        addElement(test2);
 
 
     }
@@ -90,7 +90,7 @@ public class MainMenu extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        Fonts.mcFont.drawString("HI PLEASE BE CENTEREDΞΓɐəɘβɟɥɯɔи๏ɹʁяʌʍλ★☆✮✯☾☽☼☣๑❀✿ψ♆☪♪♩♫♬✄✆✦✧♱☻۞۩εчΣΠ", 50,150,-1,false);
+
     }
 
     @Override

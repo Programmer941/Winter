@@ -5,6 +5,8 @@ import com.winterclient.gui.Background;
 import com.winterclient.gui.screens.MainMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +40,7 @@ public abstract class WinterGuiScreen extends GuiScreen {
         Winter.instance.background.draw();
         draw(mouseX, mouseY);
         guiElements.forEach(element -> element.draw(mouseX, mouseY));
+
     }
 
     @Override

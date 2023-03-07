@@ -38,6 +38,7 @@ public class MixinGuiInGame {
         Scoreboard.instance.objective=objective;
     }
 
+
     @Inject(method = "renderGameOverlay", at = @At("TAIL"))
     public void renderGameOverlay(float partialTicks, CallbackInfo callbackInfo) {
         ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
