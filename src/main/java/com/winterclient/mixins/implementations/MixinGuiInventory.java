@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(GuiInventory.class)
 public class MixinGuiInventory {
 
-    @Overwrite
-    public void initGui()
-    {
-        Minecraft.getMinecraft().displayGuiScreen(new Inventory());
-    }
+//    @Overwrite
+//    public void initGui(){
+//        Minecraft.getMinecraft().displayGuiScreen(new Inventory());
+//    }
+
 }

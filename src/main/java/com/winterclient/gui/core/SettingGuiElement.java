@@ -17,7 +17,7 @@ public abstract class SettingGuiElement<T> extends WinterGuiElement{
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
+        //RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
         Fonts.raleway.drawString(name,x,y+height/2-Fonts.raleway.FONT_HEIGHT/2);
         int width = Fonts.raleway.getStringWidth(name);
         drawSettingElement(x+width+5);
