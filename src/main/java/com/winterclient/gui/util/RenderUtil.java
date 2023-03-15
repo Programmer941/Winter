@@ -71,6 +71,7 @@ public class RenderUtil {
         if(curved>=height/2) curved = height/2;
         if(curved>=width/2) curved = width/2;
         int step= (int) curved;
+        step=Math.max(step,1);
 
         GlStateManager.pushMatrix();
         GlStateManager.disableTexture2D();

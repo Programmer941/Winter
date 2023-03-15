@@ -27,6 +27,8 @@ public abstract class WinterGuiScreen extends GuiScreen {
     @Override
     public void updateScreen() {
         update();
+        for (WinterGuiElement element : guiElements)
+            element.onUpdate();
     }
 
     @Override
@@ -76,6 +78,9 @@ public abstract class WinterGuiScreen extends GuiScreen {
             }
         }
 
+        for (WinterGuiElement element : guiElements)
+            element.onType(typedChar,keyCode);
+
         type(typedChar, keyCode);
     }
 
@@ -86,8 +91,7 @@ public abstract class WinterGuiScreen extends GuiScreen {
     public abstract void draw(int mouseX, int mouseY);
 
     public void update(){
-        for (WinterGuiElement element : guiElements)
-            element.onUpdate();
+
     };
 
     public abstract void click(int mouseX, int mouseY, int mouseButton);

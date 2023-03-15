@@ -12,8 +12,8 @@ public class NumberElement extends SettingGuiElement<Number> {
 
     ArrayList<Number> selectableNumbers;
 
-    public NumberElement(String name, Setting setting,int start,int end,int boxes) {
-        super(name, setting);
+    public NumberElement(String name, Setting setting,int start,int end,int boxes,int x,int y) {
+        super(name, setting,x,y);
         selectableNumbers=new ArrayList<>();
         for(int i=0;i<boxes;i++){
             float currentNumber = (end-start)/ (float) (boxes-1) *  (float) (i);

@@ -1,5 +1,9 @@
 package com.winterclient.mod;
 
+import com.winterclient.gui.util.RenderUtil;
+
+import java.awt.*;
+
 public class HUDMod extends Mod{
 
     public int x,y,width,height;
@@ -22,6 +26,10 @@ public class HUDMod extends Mod{
     public void updateSize(int width,int height){
         this.width=width;
         this.height=height;
+    }
+
+    public void drawBackground(){
+        RenderUtil.drawRect(x,y,width,height, Color.black);
     }
 
 }

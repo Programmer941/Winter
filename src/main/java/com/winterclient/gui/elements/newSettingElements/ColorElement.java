@@ -12,8 +12,8 @@ public class ColorElement extends SettingGuiElement<Color> {
 
     ArrayList<Color> colors;
 
-    public ColorElement(String name, Setting<Color> setting, Color... color) {
-        super(name, setting);
+    public ColorElement(String name, Setting<Color> setting, int x,int y,Color... color) {
+        super(name, setting,x,y);
         colors=new ArrayList<>();
         colors.add(setting.getValue());
 

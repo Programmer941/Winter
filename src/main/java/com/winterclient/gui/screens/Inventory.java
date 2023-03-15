@@ -131,6 +131,7 @@ public class Inventory extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        int currentslot = mc.thePlayer.inventory.currentItem;
         int scale = 150;
         int playerX = width / 2 - 310;
         int playerY = (int) (height / 2 + scale * 0.535714286f) + 60;
@@ -145,7 +146,11 @@ public class Inventory extends WinterGuiScreen {
         for (int i = 0; i < 36; i++) {
             int yIndex = (i + 1) % 9;
             ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.mainInventory[i];
-            RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0x90000000, true));
+            if(i==currentslot){
+                RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0xB2000000, true));
+            }else{
+                RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0x90000000, true));
+            }
             GL11.glPushMatrix();
             RenderHelper.enableGUIStandardItemLighting();
             GL11.glTranslatef(offsetX + offsetItem, offsetY + offsetItem, 1);

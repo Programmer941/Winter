@@ -3,6 +3,7 @@ package com.winterclient.gui.screens;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.settingElements.BooleanButton;
 import com.winterclient.gui.util.RenderUtil;
+import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
 import com.winterclient.mod.Mod;
 import com.winterclient.setting.implementations.BooleanSetting;
@@ -43,6 +44,10 @@ public class ModSettingMenu extends WinterGuiScreen {
         Images.loadingBar.draw(width/2-250,-height/2-235-33-10, 500, 33, new Color(0xEAEEF0));
         GL11.glPopMatrix();
         RenderUtil.drawRect(width/2-415,height/2-235,830,470,new Color(0x90000000,true));
+
+        Fonts.raleway.drawCenteredString(mod.name,width/2,height/2-235-Fonts.raleway.FONT_HEIGHT/2+20);
+        Fonts.ralewaySmall.drawCenteredString(mod.description,width/2,height/2-235-Fonts.ralewaySmall.FONT_HEIGHT/2+50);
+        RenderUtil.drawLine(width/2-200,height/2-235+70,width/2+200,height/2-235+70,2,Color.white);
     }
 
     @Override
