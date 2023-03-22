@@ -17,6 +17,7 @@ public class WinterClientTweaker implements ITweaker {
     // List of Launch Arguments for getLaunchArguments[]
     private final List<String> launchArguments = new ArrayList<>();
 
+
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
         this.launchArguments.addAll(args);
@@ -35,6 +36,7 @@ public class WinterClientTweaker implements ITweaker {
             launchArguments.add("--gameDir");
             launchArguments.add(gameDir.getAbsolutePath());
         }
+
     }
 
     @Override

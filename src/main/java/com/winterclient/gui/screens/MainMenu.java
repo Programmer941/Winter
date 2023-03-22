@@ -6,20 +6,14 @@ import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.*;
 import com.winterclient.gui.elements.Button;
-import com.winterclient.gui.elements.newSettingElements.BooleanElement;
-import com.winterclient.gui.elements.newSettingElements.ColorElement;
-import com.winterclient.gui.elements.newSettingElements.NumberElement;
-import com.winterclient.gui.elements.newSettingElements.TestElement;
-import com.winterclient.gui.elements.newSettingElements.blockElement.BlockElement;
+
+import com.winterclient.gui.elements.settingElements.NumberElement;
 import com.winterclient.gui.shader.implementations.BlurShader;
-import com.winterclient.setting.implementations.BooleanSetting;
-import com.winterclient.setting.implementations.ColorSetting;
 import com.winterclient.setting.implementations.NumberSetting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiOptions;
 import net.minecraft.client.gui.GuiScreen;
-
-import java.awt.*;
+import org.lwjgl.opengl.Display;
 
 public class MainMenu extends WinterGuiScreen {
 
@@ -78,16 +72,8 @@ public class MainMenu extends WinterGuiScreen {
 //                mc.displayGuiScreen(new GuiMultiplayer(mc.currentScreen));
 //            }
 //        });
-        BooleanElement test = new BooleanElement("booleanTest",new BooleanSetting("booleanSetting",false),100,200);
-        NumberElement test2 = new NumberElement("numberTest", new NumberSetting("hiii",3),0,21,10,100,260);
-        ColorElement test3 = new ColorElement("color", new ColorSetting("hi", Color.black), 100,320,Color.black,Color.white,new Color(0xf8dca4),new Color(0xA4C0F8));
-        addElement(test);
-        addElement(test2);
-        addElement(test3);
-        addElement(new TestElement(500,700,22,64,6));
-        addElement(new TextBox("placeholder",900,100,300,50));
-addElement(new BlockElement(200,200));
-        addElement(new BlockElement(600,200));
+//        numberSetting = new NumberSetting("lols",3);
+//        addElement(numberElement = new NumberElement(numberSetting,22,64,6));
 
 
     }

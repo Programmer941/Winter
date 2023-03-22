@@ -33,7 +33,6 @@ public abstract class MixinGuiNewChat {
     @Overwrite
     public void printChatMessageWithOptionalDeletion(IChatComponent chatComponent, int chatLineId)
     {
-        System.out.println(chatComponent.getChatStyle());
         setChatLine(chatComponent, chatLineId, Minecraft.getMinecraft().ingameGUI.getUpdateCounter(), false);
     }
 
@@ -48,7 +47,6 @@ public abstract class MixinGuiNewChat {
     @Inject(method = "setChatLine", at = @At("TAIL"))
     private void setChatLineEnd(IChatComponent chatComponent, int chatLineId, int updateCounter, boolean displayOnly, CallbackInfo callbackInfo){
         int index = Math.max(0,drawnChatLines.size()-5);
-        System.out.println(drawnChatLines.get(index).getChatComponent());
     }
 
 

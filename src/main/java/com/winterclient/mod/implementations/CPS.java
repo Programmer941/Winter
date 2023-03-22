@@ -1,5 +1,6 @@
 package com.winterclient.mod.implementations;
 
+import com.winterclient.Winter;
 import com.winterclient.event.Subscribe;
 import com.winterclient.event.implementations.ClickEvent;
 import com.winterclient.event.implementations.OverlayEvent;
@@ -28,7 +29,11 @@ public class CPS extends HUDMod {
         rightCps=new ArrayList<>();
         savedMilliseconds=0;
 
-        addSetting(title);
+       //addSetting(title);
+        addSetting(blurAmount);
+        addSetting(colorOpacity);
+        addSettingElement(blurElement);
+        addSettingElement(opacityElement);
     }
 
     @Subscribe
@@ -45,6 +50,7 @@ public class CPS extends HUDMod {
 
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
+        super.drawBackground();
         long milliseconds = System.currentTimeMillis();
 
         ArrayList<Long> removal = new ArrayList();
@@ -71,4 +77,5 @@ public class CPS extends HUDMod {
             Fonts.raleway.drawCenteredString(leftCps.size()+" | "+rightCps.size(), x+width/2, y+height/2-Fonts.raleway.FONT_HEIGHT/2);
         }
     }
+
 }

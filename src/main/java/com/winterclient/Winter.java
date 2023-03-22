@@ -1,5 +1,6 @@
 package com.winterclient;
 
+import com.winterclient.config.SettingManager;
 import com.winterclient.data.AccountManager;
 import com.winterclient.data.BorrowLunarAccounts;
 import com.winterclient.discord.Discord;
@@ -46,9 +47,11 @@ public enum Winter {
         Discord.start();
         eventBus = new EventBus();
         modManager=new ModManager();
+        new SettingManager().readSettings();
     }
 
     public final void end() {
+        new SettingManager().writeSettings();
         System.out.println("Saving all data!");
         Winter.instance.accountManager.saveAccounts();
     }

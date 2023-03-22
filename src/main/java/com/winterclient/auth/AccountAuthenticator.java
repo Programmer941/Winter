@@ -141,7 +141,7 @@ public class AccountAuthenticator {
                 "TokenType", "JWT"
         );
 
-        System.out.println(info);
+        //System.out.println(info);
 
         JSONObject json = new JSONObject(info);
 

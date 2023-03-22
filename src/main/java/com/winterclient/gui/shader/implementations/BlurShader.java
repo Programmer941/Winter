@@ -52,7 +52,7 @@ public class BlurShader extends Shader {
         setupUniforms(1, 0, radius);
         GL11.glBindTexture(GL_TEXTURE_2D,mc.getFramebuffer().framebufferTexture);
 
-        drawQuads(x-15, y-15, width+30, height+30, x-15, y-15, width+30, height+30, mc.getFramebuffer().framebufferWidth, mc.getFramebuffer().framebufferHeight);
+        drawQuads(x-30, y-30, width+60, height+60, x-15, y-15, width+30, height+30, mc.getFramebuffer().framebufferWidth, mc.getFramebuffer().framebufferHeight);
         framebuffer.unbindFramebuffer();
         unload();
 

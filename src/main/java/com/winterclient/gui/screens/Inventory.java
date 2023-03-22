@@ -2,9 +2,11 @@ package com.winterclient.gui.screens;
 
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.util.RenderUtil;
+import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.mixins.implementations.MixinShapelessRecipes;
 import com.winterclient.util.Crafts;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
@@ -120,7 +122,6 @@ public class Inventory extends WinterGuiScreen {
         //}
 
 
-
     }
 
 
@@ -129,26 +130,41 @@ public class Inventory extends WinterGuiScreen {
 
     }
 
+    public int slotHovered(int mouseX, int mouseY) {
+        int xSlot = (mouseX - (width / 2 - 300 + 75) + 4) / 72;
+        int ySlot = ((height / 2 + 128 + 12 - 8) - mouseY) / 72;
+        int negX = mouseX - (width / 2 - 300 + 75) + 4;
+        int negY = (height / 2 + 128 + 12 - 4) - mouseY;
+        if (negX > -4 && negY > -4 && xSlot < 9 && ySlot < 4) {
+            int index = xSlot + ySlot * 9;
+            return index;
+        }
+        return -1;
+    }
+
     @Override
     public void draw(int mouseX, int mouseY) {
+        int hovered = slotHovered(mouseX, mouseY);
         int currentslot = mc.thePlayer.inventory.currentItem;
         int scale = 150;
         int playerX = width / 2 - 310;
-        int playerY = (int) (height / 2 + scale * 0.535714286f) + 60;
+        int playerY = (int) (height / 2 + scale * 0.535714286f) + 62;
         int inventoryWidth = 440;
         int inventoryHeight = 320;
         drawEntityOnScreen(playerX, playerY, scale, playerX - mouseX, playerY - mouseY - scale * 2 + scale / 3f + 6, mc.thePlayer);
         //RenderUtil.drawRect(width/2-inventoryWidth/2,height/2-inventoryHeight/2,inventoryWidth,inventoryHeight,new Color(0x90000000,true));
         int boxSize = 64;
         int offsetX = width / 2 - 300 + scale / 2;
-        int offsetY = height / 2 + boxSize + 8;
+        int offsetY = height / 2 + boxSize + 12;
         int offsetItem = (boxSize - 16 * 3) / 2;
         for (int i = 0; i < 36; i++) {
             int yIndex = (i + 1) % 9;
             ItemStack itemstack = Minecraft.getMinecraft().thePlayer.inventory.mainInventory[i];
-            if(i==currentslot){
+            if (i == hovered) {
+                RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0x90FFFFFF, true));
+            } else if (i == currentslot) {
                 RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0xB2000000, true));
-            }else{
+            } else {
                 RenderUtil.drawRect(offsetX, offsetY, boxSize, boxSize, new Color(0x90000000, true));
             }
             GL11.glPushMatrix();
@@ -156,8 +172,13 @@ public class Inventory extends WinterGuiScreen {
             GL11.glTranslatef(offsetX + offsetItem, offsetY + offsetItem, 1);
             GL11.glScalef(3, 3, 1);
             GL11.glTranslatef(-offsetX - offsetItem, -offsetY - offsetItem, 1);
+            mc.getTextureManager().bindTexture(Gui.icons);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
             Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(itemstack, offsetX + offsetItem, offsetY + offsetItem);
+            GL11.glDisable(GL11.GL_DEPTH_TEST);
             GL11.glPopMatrix();
+            if (itemstack != null && itemstack.stackSize > 1)
+                Fonts.ralewaySmall.drawString(String.valueOf(itemstack.stackSize), offsetX + 64 - Fonts.ralewaySmall.getStringWidth(String.valueOf(itemstack.stackSize)) - 2, offsetY + 36);
             offsetX += boxSize + 8;
             if (yIndex == 0) {
                 offsetY -= boxSize + 8;
@@ -235,7 +256,7 @@ public class Inventory extends WinterGuiScreen {
 
     @Override
     public void type(char typedChar, int keyCode) {
-        if(keyCode== Keyboard.KEY_E)
+        if (keyCode == Keyboard.KEY_E)
             Minecraft.getMinecraft().displayGuiScreen(null);
     }
 }

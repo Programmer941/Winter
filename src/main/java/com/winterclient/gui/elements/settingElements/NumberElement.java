@@ -1,27 +1,28 @@
-package com.winterclient.gui.elements.newSettingElements;
+package com.winterclient.gui.elements.settingElements;
 
+import com.winterclient.gui.core.SettingGuiElement;
 import com.winterclient.gui.core.WinterGuiElement;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
+import com.winterclient.setting.implementations.NumberSetting;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class TestElement extends WinterGuiElement {
+public class NumberElement extends SettingGuiElement<Number> {
 
     ArrayList<Number> selectableNumbers;
     int selectedIndex;
-    public float selectedValue;
 
-    public TestElement(int x, int y, int start, int end, int boxes) {
-        super(x, y, 0, 50);
+    public NumberElement(NumberSetting s, int start, int end, int boxes) {
+        super(s);
         selectableNumbers = new ArrayList<>();
-        selectedValue=start;
         for (int i = 0; i < boxes; i++) {
             float currentNumber = start + (end - start) / (float) (boxes - 1) * (float) (i);
             selectableNumbers.add(currentNumber);
             width += 55;
         }
+        height=50;
     }
 
     @Override
@@ -50,9 +51,11 @@ public class TestElement extends WinterGuiElement {
 
         for (Number number : selectableNumbers) {
             if (mouseInBounds(mouseX, mouseY)) {
-                if (mouseX > x + xOffset && mouseX < x + xOffset + 50 && mouseY > y && mouseY < y + 50)
+                if (mouseX > x + xOffset && mouseX < x + xOffset + 50 && mouseY > y && mouseY < y + 50) {
                     selectedIndex = index;
-                selectedValue=number.floatValue();
+                    setting.setValue(number);
+                    System.out.println("setting setting value to: " + number);
+                }
             }
             xOffset += 55;
             index += 1;

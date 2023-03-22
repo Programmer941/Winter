@@ -1,7 +1,6 @@
 package com.winterclient.gui.screens;
 
 import com.winterclient.gui.core.WinterGuiScreen;
-import com.winterclient.gui.elements.settingElements.BooleanButton;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
@@ -22,10 +21,8 @@ public class ModSettingMenu extends WinterGuiScreen {
     @Override
     public void init() {
         drawBackground=false;
-        mod.settings.forEach(setting -> {
-            if (setting instanceof BooleanSetting){
-                addElement(new BooleanButton(setting.name,width/2-415+10,height/2-235+10,240,60, (BooleanSetting) setting));
-            }
+        mod.elements.forEach(element -> {
+            addElement(element);
         });
     }
 

@@ -2,7 +2,7 @@
   "required": true,
   "compatibilityLevel": "JAVA_8",
   "package": "com.winterclient.mixins.implementations",
-  "refmap": "mixins.winterclient.json",
+  "refmap": "mixins.winterclient.refmap.json",
   "verbose": true,
   "mixins": [
     "MixinMinecraft",

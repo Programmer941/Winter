@@ -3,7 +3,6 @@ package com.winterclient.gui.screens;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.PlayButton;
 import com.winterclient.gui.elements.TextButton;
-import com.winterclient.gui.elements.settingElements.NumberSelectObject;
 import net.minecraft.client.Minecraft;
 
 public class OverlayMenu extends WinterGuiScreen {
