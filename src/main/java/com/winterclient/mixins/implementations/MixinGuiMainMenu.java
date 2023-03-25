@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiMainMenu.class)
 public class MixinGuiMainMenu {
 
-    @Inject(method = "initGui", at = @At("HEAD"), cancellable = true)
-    public void initGui(CallbackInfo callbackInfo) {
-        Minecraft.getMinecraft().displayGuiScreen(new MainMenu());
-    }
+//    @Inject(method = "initGui", at = @At("HEAD"), cancellable = true)
+//    public void initGui(CallbackInfo callbackInfo) {
+//        Minecraft.getMinecraft().displayGuiScreen(new MainMenu());
+//    }
 }

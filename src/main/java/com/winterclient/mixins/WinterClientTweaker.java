@@ -17,26 +17,34 @@ public class WinterClientTweaker implements ITweaker {
     // List of Launch Arguments for getLaunchArguments[]
     private final List<String> launchArguments = new ArrayList<>();
 
-
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        this.launchArguments.addAll(args);
+        //this.launchArguments.addAll(args);
+        for(String arg: args){
+            System.out.println(arg);
+        }
 
         if (!args.contains("--version") && profile != null) {
-            launchArguments.add("--version");
-            launchArguments.add(profile);
+            System.out.println("not adding version");
+//            launchArguments.add("--version");
+//            launchArguments.add(profile);
         }
 
         if (!args.contains("--assetsDir") && assetsDir != null) {
-            launchArguments.add("--assetsDir");
-            launchArguments.add(assetsDir.getAbsolutePath());
+            System.out.println("not adding assetsDir");
+//            launchArguments.add("--assetsDir");
+//            launchArguments.add(assetsDir.getAbsolutePath());
         }
 
         if (!args.contains("--gameDir") && gameDir != null) {
-            launchArguments.add("--gameDir");
-            launchArguments.add(gameDir.getAbsolutePath());
+            System.out.println("not adding gameDir");
+//            launchArguments.add("--gameDir");
+//            launchArguments.add(gameDir.getAbsolutePath());
         }
 
+        for (String launchArg : launchArguments){
+            System.out.println("launchArg: "+launchArg);
+        }
     }
 
     @Override
