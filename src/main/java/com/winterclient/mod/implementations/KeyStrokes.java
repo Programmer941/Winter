@@ -88,11 +88,19 @@ public class KeyStrokes extends HUDMod {
 
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
-        Images.keyStrokes.draw(x,y,width,height);
+        Color defaultColor=new Color(0x90000000,true);
+        //Images.keyStrokes.draw(x,y,width,height);
         renderPressAnimation(forwardAnimation,x+center,y+outerShadow,baseKeySize,baseKeySize);
         renderPressAnimation(backwardAnimation,x+center,y+outerShadow+baseKeySize+innerShadow,baseKeySize,baseKeySize);
         renderPressAnimation(leftAnimation,x+outerShadow,y+outerShadow+baseKeySize+innerShadow,baseKeySize,baseKeySize);
         renderPressAnimation(rightAnimation,x+width-outerShadow-baseKeySize,y+outerShadow+baseKeySize+innerShadow,baseKeySize,baseKeySize);
+
+        RenderUtil.drawRect(x+62,y+11,48,48,defaultColor);
+        RenderUtil.drawRect(x+62,y+62,48,48,defaultColor);
+        RenderUtil.drawRect(x+11,y+62,48,48,defaultColor);
+        RenderUtil.drawRect(x+113,y+62,48,48,defaultColor);
+        RenderUtil.drawRect(x+11,y+113,74,48,defaultColor);
+        RenderUtil.drawRect(x+88,y+113,74,48,defaultColor);
 
         leftClickAnimations.forEach(animation -> {
             renderPressAnimation(animation,x+outerShadow,y+113,74,baseKeySize);

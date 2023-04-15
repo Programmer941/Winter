@@ -51,6 +51,8 @@ public class CPS extends HUDMod {
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
         super.drawBackground();
+        RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
+
         long milliseconds = System.currentTimeMillis();
 
         ArrayList<Long> removal = new ArrayList();

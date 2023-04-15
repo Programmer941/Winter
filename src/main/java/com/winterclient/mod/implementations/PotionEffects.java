@@ -2,6 +2,7 @@ package com.winterclient.mod.implementations;
 
 import com.winterclient.event.Subscribe;
 import com.winterclient.event.implementations.OverlayEvent;
+import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.mod.HUDMod;
 import com.winterclient.mod.properties.Category;
@@ -27,6 +28,8 @@ public class PotionEffects extends HUDMod {
 
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
+        //RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
+        mc.getTextureManager().bindTexture(Gui.icons);
         int posX = x;
         int posY = y;
 

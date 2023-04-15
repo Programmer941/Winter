@@ -3,12 +3,14 @@ package com.winterclient.mod.implementations;
 import com.winterclient.event.Subscribe;
 import com.winterclient.event.implementations.OverlayEvent;
 import com.winterclient.event.implementations.TickEvent;
+import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.mod.HUDMod;
 import com.winterclient.mod.properties.Category;
 import com.winterclient.mod.properties.Info;
 import com.winterclient.util.Timer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.network.OldServerPinger;
 
@@ -57,6 +59,8 @@ public class Ping extends HUDMod {
 
     @Subscribe
     public void onRenderOverlay(OverlayEvent o) {
+        RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
+
         Fonts.raleway.drawCenteredString(Integer.toString(ping), x+width/2, y+height/2-Fonts.raleway.FONT_HEIGHT/2);
     }
 

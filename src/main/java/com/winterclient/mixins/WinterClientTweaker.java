@@ -19,31 +19,28 @@ public class WinterClientTweaker implements ITweaker {
 
     @Override
     public void acceptOptions(List<String> args, File gameDir, File assetsDir, String profile) {
-        //this.launchArguments.addAll(args);
-        for(String arg: args){
-            System.out.println(arg);
-        }
+        String launchType=args.get(5);
+        boolean intellijLaunch=launchType.equals("FML");
+        if(intellijLaunch) {
+            this.launchArguments.addAll(args);
 
-        if (!args.contains("--version") && profile != null) {
-            System.out.println("not adding version");
-//            launchArguments.add("--version");
-//            launchArguments.add(profile);
-        }
+            if (!args.contains("--version") && profile != null) {
+                System.out.println("not adding version");
+            launchArguments.add("--version");
+            launchArguments.add(profile);
+            }
 
-        if (!args.contains("--assetsDir") && assetsDir != null) {
-            System.out.println("not adding assetsDir");
-//            launchArguments.add("--assetsDir");
-//            launchArguments.add(assetsDir.getAbsolutePath());
-        }
+            if (!args.contains("--assetsDir") && assetsDir != null) {
+                System.out.println("not adding assetsDir");
+            launchArguments.add("--assetsDir");
+            launchArguments.add(assetsDir.getAbsolutePath());
+            }
 
-        if (!args.contains("--gameDir") && gameDir != null) {
-            System.out.println("not adding gameDir");
-//            launchArguments.add("--gameDir");
-//            launchArguments.add(gameDir.getAbsolutePath());
-        }
-
-        for (String launchArg : launchArguments){
-            System.out.println("launchArg: "+launchArg);
+            if (!args.contains("--gameDir") && gameDir != null) {
+                System.out.println("not adding gameDir");
+            launchArguments.add("--gameDir");
+            launchArguments.add(gameDir.getAbsolutePath());
+            }
         }
     }
 
