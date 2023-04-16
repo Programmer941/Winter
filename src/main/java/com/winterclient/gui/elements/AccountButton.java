@@ -14,17 +14,45 @@ public class AccountButton extends WinterGuiElement {
 
     public Account account;
 
+    Animation hover;
+    Animation selected;
     public AccountButton(Account account, int x, int y) {
         super(x, y, 60, 60);
         this.account = account;
+        int widthS = Fonts.raleway.getStringWidth(account.name);
+        width+=20+widthS;
+        hover=new Animation(0);
+        selected=new Animation(0);
+
     }
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        int widthS = Fonts.raleway.getStringWidth(account.name);
-        RenderUtil.drawRect(x,y,80+widthS,60,new Color(0x59000000, true));
+        float value= hover.getValue();
+        float selectValue=selected.getValue();
+        RenderUtil.drawRect(x,y,width,60,new Color(0,0,selectValue,.35f-value));
         Fonts.raleway.drawString(account.name,x+70,y+height/2-Fonts.raleway.FONT_HEIGHT/2);
         account.avatarImage.draw(x, y, 60, 60);
+
+        if(this.mouseInBounds(mouseX,mouseY)){
+            if(hover.end==0){
+                hover.goTo(.2f,0.2f);
+            }
+        }else{
+            if(hover.end!=0){
+                hover.goTo(0,0.2f);
+            }
+        }
+        if(Winter.instance.accountManager.activeAccount!=null)
+            if(Winter.instance.accountManager.activeAccount.uuid.equals(account.uuid)){
+            if(selected.end==0){
+                selected.goTo(.2f,0.2f);
+            }
+        }else{
+            if(selected.end!=0){
+                selected.goTo(0,0.2f);
+            }
+        }
     }
 
     @Override

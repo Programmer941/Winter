@@ -25,19 +25,16 @@ public class WinterClientTweaker implements ITweaker {
             this.launchArguments.addAll(args);
 
             if (!args.contains("--version") && profile != null) {
-                System.out.println("not adding version");
             launchArguments.add("--version");
             launchArguments.add(profile);
             }
 
             if (!args.contains("--assetsDir") && assetsDir != null) {
-                System.out.println("not adding assetsDir");
             launchArguments.add("--assetsDir");
             launchArguments.add(assetsDir.getAbsolutePath());
             }
 
             if (!args.contains("--gameDir") && gameDir != null) {
-                System.out.println("not adding gameDir");
             launchArguments.add("--gameDir");
             launchArguments.add(gameDir.getAbsolutePath());
             }

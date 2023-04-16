@@ -25,9 +25,6 @@ public class MainMenu extends WinterGuiScreen {
     BlurShader blurShader;
     Animation e;
 
-    BufferedImage accountImage = null;
-    DefaultImage playerImage=null;
-
     @Override
     public void init() {
         blurShader = new BlurShader();
@@ -53,22 +50,6 @@ public class MainMenu extends WinterGuiScreen {
                 }
             }
         });
-
-//        addElement(new Button(width / 2 - 30, height - 80, 60, 60) {
-//            @Override
-//            public void onClick(int mouseX, int mouseY, int mouseButton) {
-//                mc.displayGuiScreen(new GuiOptions(mc.currentScreen, Minecraft.getMinecraft().gameSettings));
-//            }
-//        });
-//        addElement(new Button(width - 70, 10, 60, 60) {
-//            @Override
-//            public void onClick(int mouseX, int mouseY, int mouseButton) {
-//                if (GuiScreen.getClipboardString().length() > 40) {
-//                    Winter.instance.accountManager.addAccountThroughMicrosoftToken(GuiScreen.getClipboardString());
-//                }
-//            }
-//        });
-
         addElement(new MenuButton("Singleplayer", width / 2 - 150, height / 2 - 60 - 5, 300, 60) {
             @Override
             public void onClick(int mouseX, int mouseY, int mouseButton) {
@@ -81,25 +62,6 @@ public class MainMenu extends WinterGuiScreen {
                 mc.displayGuiScreen(new Multiplayer());
             }
         });
-        //addElement(new PlayButton("Multiplayer",60,height/2+40,500,33));
-
-//        addElement(new CircleButton(width / 2 - 116, height / 2-50, 100){
-//            @Override
-//            public void onClick(int mouseX, int mouseY) {
-//                mc.displayGuiScreen(new GuiSelectWorld(mc.currentScreen));
-//            }
-//
-//            });
-//        addElement(new CircleButton(width / 2+16, height / 2-50, 100){
-//            @Override
-//            public void onClick(int mouseX, int mouseY) {
-//                mc.displayGuiScreen(new GuiMultiplayer(mc.currentScreen));
-//            }
-//        });
-//        numberSetting = new NumberSetting("lols",3);
-//        addElement(numberElement = new NumberElement(numberSetting,22,64,6));
-
-        getAccountDisplayImage();
     }
 
     @Override
@@ -113,13 +75,6 @@ public class MainMenu extends WinterGuiScreen {
         Winter.instance.blurShader.renderBlur(0, 0, width, height, 20f);
         Winter.instance.background.drawSnow();
         Images.title.draw(width / 2 - 202, height / 4 - 50, 404, 118);
-        if(accountImage!=null && playerImage==null){
-
-            playerImage=new DefaultImage(accountImage);
-
-        }
-        if(playerImage!=null)
-            playerImage.draw(10,height/2,160,360);
     }
 
     @Override
@@ -134,20 +89,6 @@ public class MainMenu extends WinterGuiScreen {
             Winter.instance.accountManager.pendingNewAccounts = false;
             Minecraft.getMinecraft().displayGuiScreen(this);
         }
-    }
-
-    public void getAccountDisplayImage() {
-        new Thread(() -> {
-            String prefix = "https://crafatar.com/renders/body/";
-            String suffix = "?scale=8&overlay";
-            try {
-                BufferedImage img = ImageIO.read(new URL(prefix + Winter.instance.accountManager.activeAccount.uuid + suffix));
-                accountImage = img;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }).start();
     }
 
     @Override

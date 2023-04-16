@@ -39,16 +39,9 @@ public class LoadingScreen {
         GlStateManager.enableTexture2D();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         Winter.instance.background.draw();
-        Images.loadingBar.draw(177,Display.getHeight()-100,500,33,new Color(244, 219, 163, 140));
-
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-        System.out.println(progressWidth);
-        int scissorX=(int) (width/2-progressWidth/2f);
-        GL11.glScissor(scissorX, 0, progressWidth, height);
-        Images.loadingBar.draw(177,Display.getHeight()-100,500,33,new Color(0xF4DBA3));
-        GL11.glDisable(GL11.GL_SCISSOR_TEST);
-        GL11.glPopMatrix();
+        Winter.instance.blurShader.renderBlurWhole(framebuffer,20f);
+        Winter.instance.background.drawSnow();
+        Images.title.draw(width / 2 - 202, height / 2 - 118/2, 404, 118);
         framebuffer.unbindFramebuffer();
         framebuffer.framebufferRender(width, height);
 

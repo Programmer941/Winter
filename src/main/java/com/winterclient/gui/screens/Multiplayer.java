@@ -48,6 +48,9 @@ public class Multiplayer extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        Winter.instance.background.draw();
+        Winter.instance.blurShader.renderBlur(0, 0, width, height, 20f);
+        Winter.instance.background.drawSnow();
     }
 
     @Override

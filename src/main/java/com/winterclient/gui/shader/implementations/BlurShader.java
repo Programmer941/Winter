@@ -68,6 +68,36 @@ public class BlurShader extends Shader {
         GlStateManager.bindTexture(0);
     }
 
+    public void renderBlurWhole(Framebuffer buffer,float radius){
+        Minecraft mc = Minecraft.getMinecraft();
+        GlStateManager.enableBlend();
+        GlStateManager.color(1, 1, 1, 1);
+        OpenGlHelper.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+
+        framebuffer = createFrameBuffer(framebuffer, mc.displayWidth, mc.displayHeight);
+        framebuffer.framebufferClear();
+        framebuffer.bindFramebuffer(true);
+
+        load();
+        setupUniforms(1, 0, radius);
+        GL11.glBindTexture(GL_TEXTURE_2D,buffer.framebufferTexture);
+
+        drawQuads(0,0, buffer.framebufferWidth, buffer.framebufferHeight, 0, 0, buffer.framebufferWidth, buffer.framebufferHeight, mc.displayWidth, mc.displayHeight);
+        framebuffer.unbindFramebuffer();
+        unload();
+
+
+        buffer.bindFramebuffer(true);
+        load();
+        setupUniforms(0, 1, radius);
+
+        GL11.glBindTexture(GL_TEXTURE_2D,framebuffer.framebufferTexture);
+        drawQuads(0, 0, buffer.framebufferWidth, buffer.framebufferHeight, 0, 0, buffer.framebufferWidth, buffer.framebufferHeight, mc.displayWidth, mc.displayHeight);
+        unload();
+        resetColor();
+        GlStateManager.bindTexture(0);
+    }
+
     public void drawFirstBuffer() {
         float width = Minecraft.getMinecraft().displayWidth;
         float height = Minecraft.getMinecraft().displayHeight;

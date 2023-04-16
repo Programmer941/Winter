@@ -1,5 +1,6 @@
 package com.winterclient.gui.screens;
 
+import com.winterclient.Winter;
 import com.winterclient.gui.core.WinterGuiScreen;
 import com.winterclient.gui.elements.ServerObject;
 import com.winterclient.gui.elements.WorldObject;
@@ -42,7 +43,9 @@ public class Singleplayer extends WinterGuiScreen {
 
     @Override
     public void draw(int mouseX, int mouseY) {
-
+        Winter.instance.background.draw();
+        Winter.instance.blurShader.renderBlur(0, 0, width, height, 20f);
+        Winter.instance.background.drawSnow();
     }
 
     @Override
