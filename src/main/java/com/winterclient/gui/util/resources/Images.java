@@ -19,9 +19,8 @@ public class Images {
     public static DefaultImage snow = new DefaultImage(getImage("snow.png"));
     public static DefaultImage loadingBar = new DefaultImage(getImage("loading.png"));
     public static DefaultImage selected = new DefaultImage(getImage("selected.png"));
-    public static DefaultImage keyStrokes = new DefaultImage(getImage("keystrokes.png"));
-    public static DefaultImage drop = new DefaultImage(getImage("drop.png"));
     public static DefaultImage crosshair = new DefaultImage(getImage("crosshair.png"));
+    public static DefaultImage title = new DefaultImage(getImage("title.png"));
 
     public static BufferedImage getImage(String name){
         BufferedImage bufferedImage = null;

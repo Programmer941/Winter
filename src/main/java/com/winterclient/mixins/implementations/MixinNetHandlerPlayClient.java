@@ -29,6 +29,7 @@ import java.util.List;
 @Mixin(NetHandlerPlayClient.class)
 public class MixinNetHandlerPlayClient {
 
+    //patch some vulnerability
     @Inject(method = "handleResourcePack", at = @At("HEAD"), cancellable = true)
     public void handleResourcePack(S48PacketResourcePackSend packetIn, CallbackInfo callbackInfo){
         final String s = packetIn.getURL();

@@ -2,37 +2,38 @@ package com.winterclient.gui.elements;
 
 import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiElement;
+import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.gui.util.resources.Images;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class PlayButton extends WinterGuiElement {
+public class MenuButton extends WinterGuiElement {
 
     String text;
 
-    Animation linePos;
+    Animation hover;
 
-    public PlayButton(String text, int x, int y, int width, int height) {
+    public MenuButton(String text, int x, int y,int width,int height) {
         super(x, y, width, height);
         this.text = text;
-        linePos=new Animation(0);
+        hover=new Animation(0);
     }
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        GL11.glPushMatrix();
-        GL11.glTranslatef(x + 150, y + 10, 0.0f);
-        GL11.glScalef(-1, -1, 0.0f);
-        GL11.glTranslatef(-x - 150, -y - 10, 0.0f);
-        Images.loadingBar.draw(x, (int) (y - 40-linePos.getValue()), 300, 20, new Color(0xEAEEF0));
-        GL11.glPopMatrix();
-        Fonts.raleway.drawCenteredString(text, x + 150, y);
-        if(mouseInBounds(mouseX,mouseY)){
-            linePos.goTo(15,0.1f);
-        }else {
-            linePos.goTo(0,0.1f);
+        float value= hover.getValue();
+        RenderUtil.drawRect(x,y,width,height,new Color(0,0,0,.35f-value));
+        Fonts.raleway.drawCenteredString(text, x + width/2, y+height/2-Fonts.raleway.FONT_HEIGHT/2);
+        if(this.mouseInBounds(mouseX,mouseY)){
+            if(hover.end==0){
+                hover.goTo(.2f,0.2f);
+            }
+        }else{
+            if(hover.end!=0){
+                hover.goTo(0,0.2f);
+            }
         }
     }
 

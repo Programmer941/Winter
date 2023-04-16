@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(EntityRenderer.class)
 public class MixinEntityRenderer {
 
+    //No camera shake
     @Overwrite
     private void hurtCameraEffect(float partialTicks){
 

@@ -27,6 +27,9 @@ public class Background {
 
     public void draw() {
         Images.background.draw(0, 0, width, height);
+    }
+
+    public void drawSnow(){
         snowList.forEach(snow -> {
             snow.move(width,height);
             snow.draw();

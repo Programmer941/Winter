@@ -1,7 +1,6 @@
 package com.winterclient.gui.screens;
 
 import com.winterclient.gui.core.WinterGuiScreen;
-import com.winterclient.gui.elements.PlayButton;
 import com.winterclient.gui.elements.TextButton;
 import net.minecraft.client.Minecraft;
 

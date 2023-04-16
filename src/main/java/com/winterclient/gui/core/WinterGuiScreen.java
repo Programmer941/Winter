@@ -38,11 +38,8 @@ public abstract class WinterGuiScreen extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if(drawBackground)
-        Winter.instance.background.draw();
         draw(mouseX, mouseY);
         guiElements.forEach(element -> element.draw(mouseX, mouseY));
-
     }
 
     @Override

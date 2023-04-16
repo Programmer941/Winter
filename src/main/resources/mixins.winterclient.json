@@ -9,22 +9,12 @@
     "MixinGuiMainMenu",
     "MixinGuiInGame",
     "MixinScaledResolution",
-    "MixinBlockBarrier",
     "MixinEntityRenderer",
     "MixinGuiNewChat",
-    "MixinGuiChat",
     "MixinNetHandlerPlayClient",
     "MixinScoreboard",
     "MixinEntityLivingBase",
-    "MixinItemModelGenerator",
-    "MixinEntityPlayer",
-    "MixinEntityPlayerSP",
     "MixinPlayerUsageSnooper",
-    "MixinShapelessRecipes",
-    "MixinShapedRecipes",
-    "MixinCraftingManager",
-    "MixinGuiDownloadTerrain",
-    "MixinLoadingScreenRenderer",
-    "MixinGuiInventory"
+    "MixinLoadingScreenRenderer"
   ]
 }

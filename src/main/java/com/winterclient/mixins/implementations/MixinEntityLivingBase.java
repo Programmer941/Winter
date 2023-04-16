@@ -18,17 +18,11 @@ public abstract class MixinEntityLivingBase extends Entity {
         super(worldIn);
     }
 
+    //1 tick behind fix
     @Inject(method = "getLook", at = @At("HEAD"), cancellable = true)
     private void getLook(float partialTicks, CallbackInfoReturnable<Vec3> cir) {
         if ((EntityLivingBase) (Object) this instanceof EntityPlayerSP) {
             cir.setReturnValue(super.getLook(partialTicks));
-        }
-    }
-
-    @Inject(method = "damageEntity", at = @At("HEAD"), cancellable = true)
-    protected void damageEntity(DamageSource damageSrc, float damageAmount,CallbackInfo callbackInfo){
-        if ((EntityLivingBase) (Object) this instanceof EntityPlayerSP) {
-            System.out.println("PLAYER TOOK DAMAGE");
         }
     }
 
