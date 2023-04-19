@@ -33,6 +33,7 @@ public class ServerObject extends WinterGuiElement {
     DefaultImage icon=null;
 
     Animation hover;
+    Animation fade;
 
 
     public ServerObject(ServerData serverData,int x,int y) {
@@ -42,9 +43,15 @@ public class ServerObject extends WinterGuiElement {
         this.ip=serverData.serverIP;
         generateIcon();
         hover=new Animation(0);
+        fade=new Animation(0);
+        start();
     }
 
     public void generateIcon(){
+        if(serverData.getBase64EncodedIconData()==null){
+            icon=Images.placeHolder;
+            return;
+        }
             ByteBuf bytebuf = Unpooled.copiedBuffer(serverData.getBase64EncodedIconData(), Charsets.UTF_8);
             ByteBuf bytebuf1 = Base64.decode(bytebuf);
         try {
@@ -60,17 +67,18 @@ public class ServerObject extends WinterGuiElement {
     @Override
     public void draw(int mouseX, int mouseY) {
         float value= hover.getValue();
+        float fadeValue = fade.getValue();
         width= (int) (800+value*100f);
-        RenderUtil.drawRoundRect(x,y,width,height,new Color(0,0,0,.35f-value),height);
-        icon.draw(x,y,120,120);
+        RenderUtil.drawRoundRect(x,y,width,height,new Color(0,0,0,(.35f-value)*fadeValue),height);
+        icon.draw(x,y,120,120,new Color(1,1,1,fadeValue));
         //RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
-        Fonts.raleway.drawCenteredString(name,x+width/2,y+5);
+        Fonts.raleway.drawCenteredString(name,x+width/2,y+5,new Color(1,1,1,fadeValue));
         if(description!=null){
             String str1 = description.get(0).replaceAll("  +", "");
-            Fonts.mcFont.drawCenteredString(str1,x+width/2,y+47);
+            Fonts.mcFont.drawCenteredString(str1,x+width/2,y+47,new Color(1,1,1,fadeValue));
 
             if(description.size()>1)
-            Fonts.mcFont.drawCenteredString(description.get(1).replaceAll("  +", ""),x+width/2,y+81);
+            Fonts.mcFont.drawCenteredString(description.get(1).replaceAll("  +", ""),x+width/2,y+81,new Color(1,1,1,fadeValue));
 
         }
 
@@ -110,6 +118,16 @@ public class ServerObject extends WinterGuiElement {
     @Override
     public boolean isCollided(int mouseX, int mouseY) {
         return true;
+    }
+
+    @Override
+    public void start() {
+        fade.goTo(1,0.4f);
+    }
+
+    @Override
+    public void stop() {
+        fade.goTo(0,0.4f);
     }
 
     private void connectToServer(ServerData server)

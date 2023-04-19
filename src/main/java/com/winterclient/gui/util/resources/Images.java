@@ -21,6 +21,8 @@ public class Images {
     public static DefaultImage selected = new DefaultImage(getImage("selected.png"));
     public static DefaultImage crosshair = new DefaultImage(getImage("crosshair.png"));
     public static DefaultImage title = new DefaultImage(getImage("title.png"));
+    public static DefaultImage multiplayerTitle = new DefaultImage(getImage("multiplayerTitle.png"));
+    public static DefaultImage placeHolder = new DefaultImage(roundImage(getImage("placeholder.png"),60));
 
     public static BufferedImage getImage(String name){
         BufferedImage bufferedImage = null;

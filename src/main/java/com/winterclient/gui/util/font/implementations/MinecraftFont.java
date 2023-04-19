@@ -61,14 +61,14 @@ public class MinecraftFont {
         }
     }
 
-    public void drawString(String text, int x, int y, int color, boolean shadow) {
+    public void drawString(String text, int x, int y, Color color, boolean shadow) {
         boolean randomCase = false;
         boolean bold = false;
         boolean italic = false;
         boolean strikethrough = false;
         boolean underline = false;
 
-        Color currentColor = Color.white;
+        Color currentColor = color;
 
         if (text == null)
             return;
@@ -98,8 +98,8 @@ public class MinecraftFont {
                     if (shadow)
                         colorIndex += 16;
 
-
-                    currentColor = colorCode[colorIndex];
+                    Color color1 =colorCode[colorIndex];
+                    currentColor = new Color(color1.getRed(),color1.getGreen(),color1.getBlue(),color.getAlpha());
 
                 } else if (colorIndex == 16) {
                     randomCase = true;
@@ -132,7 +132,7 @@ public class MinecraftFont {
                     underline = false;
                     strikethrough = false;
                     activeFont = regularFont;
-                    currentColor = Color.white;
+                    currentColor = color;
 
                 }
                 i++;
@@ -286,6 +286,11 @@ public class MinecraftFont {
 
     public void drawCenteredString(String s,int x,int y){
         int width= getStringSize(s);
-        drawString(s,x-width/2,y,-1,false);
+        drawString(s,x-width/2,y,Color.white,false);
+    }
+
+    public void drawCenteredString(String s,int x,int y,Color color){
+        int width= getStringSize(s);
+        drawString(s,x-width/2,y,color,false);
     }
 }

@@ -59,4 +59,14 @@ public class ModButton extends WinterGuiElement {
     public boolean isCollided(int mouseX, int mouseY) {
         return true;
     }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
 }

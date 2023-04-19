@@ -23,6 +23,15 @@ public abstract class WinterGuiElement {
 
     public abstract boolean isCollided(int mouseX, int mouseY);
 
+    public abstract void start();
+
+    public abstract void stop();
+
+    public void scroll(int amount){
+
+    }
+
+
     public boolean mouseInBounds(int mouseX, int mouseY){
         return mouseX>this.x && mouseX<this.x+this.width && mouseY>this.y && mouseY<this.y+this.height;
     }

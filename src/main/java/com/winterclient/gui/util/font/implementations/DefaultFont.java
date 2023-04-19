@@ -36,6 +36,11 @@ public class DefaultFont extends WinterGuiFont {
         drawString(text,x-width/2,y,Color.white);
     }
 
+    public void drawCenteredString(String text,int x,int y,Color c){
+        int width = getStringWidth(text);
+        drawString(text,x-width/2,y,c);
+    }
+
     public int getStringWidth(String text){
         int width = 0;
         for (int i = 0; i < text.length(); i++) {

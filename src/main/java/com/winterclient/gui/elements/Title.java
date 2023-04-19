@@ -1,24 +1,26 @@
 package com.winterclient.gui.elements;
 
+import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiElement;
-import com.winterclient.gui.util.RenderUtil;
-import com.winterclient.gui.util.resources.Fonts;
+import com.winterclient.gui.util.image.DefaultImage;
 
 import java.awt.*;
 
-public class TextButton extends WinterGuiElement {
+public class Title extends WinterGuiElement {
 
-    String text;
+    DefaultImage title;
 
-    public TextButton(String text, int x, int y, int width, int height) {
+    Animation fade;
+    public Title(int x, int y, int width, int height, DefaultImage title) {
         super(x, y, width, height);
-        this.text = text;
+        this.title=title;
+        fade=new Animation(0);
+        start();
     }
 
     @Override
     public void draw(int mouseX, int mouseY) {
-        RenderUtil.drawRect(x,y,width,height,new Color(0x90000000,true));
-        Fonts.raleway.drawCenteredString(text,x+width/2,y+height/2-Fonts.raleway.FONT_HEIGHT/2);
+        title.draw(x,y,width,height,new Color(1,1,1,fade.getValue()));
     }
 
     @Override
@@ -43,16 +45,17 @@ public class TextButton extends WinterGuiElement {
 
     @Override
     public boolean isCollided(int mouseX, int mouseY) {
-        return true;
+        return false;
     }
 
     @Override
     public void start() {
-
+        fade.goTo(1,0.4f,0.4f);
     }
 
     @Override
     public void stop() {
+        fade.goTo(0,0.4f);
 
     }
 }

@@ -1,5 +1,6 @@
 package com.winterclient.gui.elements;
 
+import com.winterclient.gui.animation.Animation;
 import com.winterclient.gui.core.WinterGuiElement;
 import com.winterclient.gui.util.RenderUtil;
 import com.winterclient.gui.util.resources.Fonts;
@@ -7,45 +8,90 @@ import com.winterclient.gui.util.resources.Images;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ChatAllowedCharacters;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
 public class TextBox extends WinterGuiElement {
 
+    public boolean selected=false;
     private String placeHolder;
-    private String text = "";
+    public String text = "";
+    private int textSize=0;
     private int cursorPosition;
     private int selectionPosition;
     int cursorShow=0;
 
+    Animation hover;
+    Animation fade;
+
+
     public TextBox(String placeHolder, int x, int y, int width, int height) {
         super(x, y, width, height);
         this.placeHolder = placeHolder;
+        hover=new Animation(0);
+        fade=new Animation(0);
+        start();
     }
 
     @Override
     public void draw(int mouseX, int mouseY) {
+        float value= hover.getValue();
+        float fadeValue = fade.getValue();
+        GL11.glPushMatrix();
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        GL11.glScissor(x, Display.getHeight() -y-height, width, height);
+        RenderUtil.drawRoundRect(x,y,width,height,new Color(0,0,0,(.35f-value)*fadeValue),30);
+        if(text.equals("")){
+            Fonts.raleway.drawString(placeHolder,x+10,y+height/2-Fonts.raleway.FONT_HEIGHT/2,new Color(0.5f, 0.5f, 0.5f, fadeValue));
+        }
+        int negativeOffset=Math.max(textSize-(width-15),0);
+        Fonts.raleway.drawString(text, x+10-negativeOffset, y+height/2-Fonts.raleway.FONT_HEIGHT/2, new Color(1f, 1f, 1f, fadeValue));
+        drawSelection(fadeValue);
+        drawCursor(fadeValue);
 
-        RenderUtil.drawRect(x, y, width, height, new Color(0x90000000,true));
-        Fonts.ralewaySmall.drawString(text, x, y+height/2-Fonts.ralewaySmall.FONT_HEIGHT/2, Color.white);
-        drawSelection();
-        drawCursor();
-    }
-
-    public void drawSelection() {
-        if(textSelected()) {
-            int startPosition = this.x+ Fonts.ralewaySmall.getStringWidth(text.substring(0, this.selectionPosition1()));
-            int width = Fonts.ralewaySmall.getStringWidth(text.substring(this.selectionPosition1(), this.selectionPosition2()));
-            RenderUtil.drawRect(startPosition, y, width, height, new Color(0x4DFFFFFF, true));
+        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+        GL11.glPopMatrix();
+        if(this.mouseInBounds(mouseX,mouseY)){
+            if(hover.end==0){
+                hover.goTo(.2f,0.2f);
+            }
+        }else{
+            if(hover.end!=0){
+                hover.goTo(0,0.2f);
+            }
         }
     }
 
-    public void drawCursor() {
-        int startPosition = this.x+ Fonts.ralewaySmall.getStringWidth(text.substring(0, this.cursorPosition));
-        if(cursorShow>8)
-        RenderUtil.drawRect(startPosition, y+height/4, 2, height/2,new Color(0xFFFFFFFF, true));
-        if(cursorShow>16)
-            cursorShow=0;
+    public void drawSelection(float fade) {
+        if(selected)
+        if(textSelected()) {
+            int startPosition = this.x+10+ Fonts.raleway.getStringWidth(text.substring(0, this.selectionPosition1()));
+            int width = Fonts.raleway.getStringWidth(text.substring(this.selectionPosition1(), this.selectionPosition2()));
+            int offset=0;
+            if(width>60 && startPosition==this.x+10){
+                offset=10;
+            }
+            int offset2=0;
+            if(width>this.width){
+                width=this.width;
+                if(offset==10)
+                offset2=10;
+            }
+            RenderUtil.drawRoundRect(startPosition-offset, y, width+offset-offset2, height, new Color(1,1,1,.35f*fade),60);
+        }
+    }
+
+    public void drawCursor(float fade) {
+        if(selected) {
+            int startPosition = this.x + 10 + Fonts.raleway.getStringWidth(text.substring(0, this.cursorPosition));
+            startPosition = Math.min(this.x + this.width - 10, startPosition);
+            if (cursorShow > 8)
+                RenderUtil.drawRect(startPosition, y + height / 4, 2, height / 2, new Color(1,1,1,fade));
+            if (cursorShow > 16)
+                cursorShow = 0;
+        }
     }
 
     public void writeText(String input)
@@ -53,10 +99,12 @@ public class TextBox extends WinterGuiElement {
         input = ChatAllowedCharacters.filterAllowedCharacters(input);
         if(input=="") return;
         if(textSelected()) {
+            if(!input.isEmpty())
             replaceText(input);
             return;
         }
         addText(input);
+        textSize=Fonts.raleway.getStringWidth(text);
     }
 
     @Override
@@ -64,7 +112,7 @@ public class TextBox extends WinterGuiElement {
         int closest=100000;
         int closestChar=0;
         for(int i=0;i<=text.length();i++) {
-            int distance=Math.abs(Fonts.ralewaySmall.getStringWidth(text.substring(0, i))+this.x-x);
+            int distance=Math.abs(Fonts.raleway.getStringWidth(text.substring(0, i))+this.x-x);
             if(distance<closest) {
                 closestChar=i;
                 closest=distance;
@@ -163,6 +211,16 @@ public class TextBox extends WinterGuiElement {
     @Override
     public boolean isCollided(int mouseX, int mouseY) {
         return true;
+    }
+
+    @Override
+    public void start() {
+        fade.goTo(1,0.4f);
+    }
+
+    @Override
+    public void stop() {
+        fade.goTo(0,0.4f);
     }
 
     public void moveCursorByWord(int direction) {

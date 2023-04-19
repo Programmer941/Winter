@@ -89,7 +89,7 @@ public class Scoreboard extends HUDMod {
             int k = j1 - j * Fonts.mcFont.FONT_HEIGHT;
             int l = x+width;
             //Gui.drawRect(l1, k+offset, l, k + Fonts.mcFont.FONT_HEIGHT+offset, 1342177280);
-            Fonts.mcFont.drawString(s1, l1, k+offset, -1,false);
+            Fonts.mcFont.drawString(s1, l1, k+offset, Color.white,false);
             //Fonts.mcFont.drawString(s2, l - Fonts.mcFont.getStringSize(s2), k, -1,false);
 
             if (j == collection.size())
@@ -106,7 +106,7 @@ public class Scoreboard extends HUDMod {
 //                    this.mc.loadWorld(null);
 //                    this.mc.displayGuiScreen(new Multiplayer());
                 }else{
-                    Fonts.mcFont.drawString(s3, l1 +150 - Fonts.mcFont.getStringSize(s3) / 2, k - Fonts.mcFont.FONT_HEIGHT+offset, -1,false);
+                    Fonts.mcFont.drawString(s3, l1 +150 - Fonts.mcFont.getStringSize(s3) / 2, k - Fonts.mcFont.FONT_HEIGHT+offset, Color.white,false);
                 }
                 //Gui.drawRect(l1, k - Fonts.mcFont.FONT_HEIGHT - 1+offset, l, k - 1+offset, 1610612736);
                 //Gui.drawRect(l1, k - 1+offset, l, k+offset, 1342177280);

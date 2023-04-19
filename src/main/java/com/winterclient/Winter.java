@@ -9,6 +9,9 @@ import com.winterclient.gui.Background;
 
 import com.winterclient.gui.LoadingScreen;
 import com.winterclient.gui.shader.implementations.BlurShader;
+import com.winterclient.gui.shader.implementations.FadeShader;
+import com.winterclient.gui.shader.implementations.RoundShader;
+import com.winterclient.gui.shader.implementations.VerticalFadeShader;
 import com.winterclient.gui.util.resources.Fonts;
 import com.winterclient.mod.Mod;
 import com.winterclient.mod.ModManager;
@@ -28,6 +31,9 @@ public enum Winter {
     public Background background;
     public LoadingScreen loadingScreen;
     public BlurShader blurShader;
+    public FadeShader fadeShader;
+    public VerticalFadeShader verticalFadeShader;
+    public RoundShader roundShader;
 
     public EventBus eventBus;
     public ModManager modManager;
@@ -40,6 +46,9 @@ public enum Winter {
         background=new Background(Display.getWidth(),Display.getHeight());
         loadingScreen=new LoadingScreen();
         blurShader=new BlurShader();
+        fadeShader=new FadeShader();
+        verticalFadeShader=new VerticalFadeShader();
+        //roundShader=new RoundShader();
     }
 
     public final void init() {

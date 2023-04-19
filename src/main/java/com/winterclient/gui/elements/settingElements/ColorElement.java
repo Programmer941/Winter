@@ -34,4 +34,14 @@ public class ColorElement extends SettingGuiElement<Color> {
     public void onUpdate() {
 
     }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void stop() {
+
+    }
 }

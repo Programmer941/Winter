@@ -37,6 +37,9 @@ public class AccountManager {
         }
 
         loadAccounts();
+        if(activeAccount==null && accountList.size()>0){
+            activeAccount=accountList.get(0);
+        }
     }
 
     public void loadAccounts() {
@@ -98,6 +101,7 @@ public class AccountManager {
                 accountsJsonObject.add(accountObject.uuid, accountJsonObject);
             });
             main.add("accounts", accountsJsonObject);
+            if(activeAccount!=null)
             main.addProperty("activeAccount", activeAccount.uuid);
             try {
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();

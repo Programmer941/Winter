@@ -53,15 +53,17 @@ public class MainMenu extends WinterGuiScreen {
         addElement(new MenuButton("Singleplayer", width / 2 - 150, height / 2 - 60 - 5, 300, 60) {
             @Override
             public void onClick(int mouseX, int mouseY, int mouseButton) {
-                mc.displayGuiScreen(new Singleplayer());
+                displayGuiScreen(new Singleplayer());
             }
         });
         addElement(new MenuButton("Multiplayer", width / 2 - 150, height / 2 + 5, 300, 60) {
             @Override
             public void onClick(int mouseX, int mouseY, int mouseButton) {
-                mc.displayGuiScreen(new Multiplayer());
+                displayGuiScreen(new Multiplayer());
             }
         });
+
+        addElement(new Title(width / 2 - 202, height / 4 - 50, 404, 118,Images.title));
     }
 
     @Override
@@ -74,7 +76,6 @@ public class MainMenu extends WinterGuiScreen {
         Winter.instance.background.draw();
         Winter.instance.blurShader.renderBlur(0, 0, width, height, 20f);
         Winter.instance.background.drawSnow();
-        Images.title.draw(width / 2 - 202, height / 4 - 50, 404, 118);
     }
 
     @Override

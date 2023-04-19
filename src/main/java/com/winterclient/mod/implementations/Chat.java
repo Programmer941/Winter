@@ -54,7 +54,7 @@ public class Chat extends HUDMod {
         int count=0;
         for(int e=messages.size()-1;e>=0;e--){
                 if(count<15)
-                Fonts.mcFont.drawString(messages.get(e).messageString,x+5,y+yy,-1,false);
+                Fonts.mcFont.drawString(messages.get(e).messageString,x+5,y+yy,Color.white,false);
                 yy-=30;
                 count+=1;
             //Fonts.mcFont.drawString(messages.get(i),x,y+yy,0xffffffff,false);
