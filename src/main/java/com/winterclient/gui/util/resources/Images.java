@@ -15,19 +15,19 @@ import java.io.IOException;
 public class Images {
 
     public static DefaultImage background=new DefaultImage(getImage("background.png"));
-    public static DefaultImage button=new DefaultImage(getImage("button.png"));
-    public static DefaultImage snow = new DefaultImage(getImage("snow.png"));
-    public static DefaultImage loadingBar = new DefaultImage(getImage("loading.png"));
-    public static DefaultImage selected = new DefaultImage(getImage("selected.png"));
-    public static DefaultImage crosshair = new DefaultImage(getImage("crosshair.png"));
+    public static DefaultImage button=new DefaultImage(getImage("circle.png"));
+    public static DefaultImage snow = new DefaultImage(getImage("circle.png"));
+    public static DefaultImage loadingBar = new DefaultImage(getImage("loading3.png"));
+    public static DefaultImage selected = new DefaultImage(getImage("add.png"));
+    public static DefaultImage crosshair = new DefaultImage(getImage("add.png"));
     public static DefaultImage title = new DefaultImage(getImage("title.png"));
-    public static DefaultImage multiplayerTitle = new DefaultImage(getImage("multiplayerTitle.png"));
-    public static DefaultImage placeHolder = new DefaultImage(roundImage(getImage("placeholder.png"),60));
+    public static DefaultImage multiplayerTitle = new DefaultImage(getImage("title.png"));
+    public static DefaultImage placeHolder = new DefaultImage(roundImage(getImage("add.png"),60));
 
     public static BufferedImage getImage(String name){
         BufferedImage bufferedImage = null;
         try {
-            bufferedImage= ImageIO.read(GeneralUtil.getResource("/assets/images/"+name));
+            bufferedImage= ImageIO.read(GeneralUtil.getResource("/assets/"+name));
         } catch (IOException e) {
             e.printStackTrace();
         }

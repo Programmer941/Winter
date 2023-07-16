@@ -26,12 +26,13 @@ public class Account {
     public void createAvatar(){
         String prefix="https://crafatar.com/avatars/";
         String suffix="?size=40&overlay";
-        try {
-            BufferedImage img = ImageIO.read(new URL(prefix+uuid+suffix));
-            avatarImage=new DefaultImage(Images.roundImage(img,7));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+////            BufferedImage img = ImageIO.read(new URL(prefix+uuid+suffix));
+////            if(img!=null)
+////            avatarImage=new DefaultImage(Images.roundImage(img,7));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public boolean isExpired(){

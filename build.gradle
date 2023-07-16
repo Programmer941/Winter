@@ -4,7 +4,7 @@ buildscript {
         jcenter()
         maven {
             name = "forge"
-            url = "https://files.minecraftforge.net/maven"
+            url = "http://files.minecraftforge.net/maven"
         }
         maven {
             name = 'sponge'
@@ -20,7 +20,6 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.tweaker-client'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'java'
-
 
 version = "1.0"
 group= "com.winterclient" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -71,7 +70,6 @@ dependencies {
 
     implementation 'com.konghq:unirest-java:3.14.1'
     implementation 'club.minnced:java-discord-rpc:2.0.2'
-
 }
 
 mixin {
@@ -110,10 +108,5 @@ jar {
         from(project.zipTree(dep)) {
             exclude 'META-INF', 'META-INF/**'
         }
-    }
-
-    task copyDependencies(type: Copy) {
-        from configurations.compileClasspath
-        into 'dependencies'
     }
 }

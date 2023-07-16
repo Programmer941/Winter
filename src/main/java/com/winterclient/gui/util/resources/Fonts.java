@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class Fonts {
 
-    public static DefaultFont raleway = new DefaultFont(getFont("monorale.ttf").deriveFont(30f));
-    public static DefaultFont ralewaySmall = new DefaultFont(getFont("monorale.ttf").deriveFont(24f));
-    public static DefaultFont ralewaySmallest = new DefaultFont(getFont("monorale.ttf").deriveFont(16f));
-    public static MinecraftFont mcFont = new MinecraftFont(getFont("monorale.ttf").deriveFont(24f));
+    public static DefaultFont raleway = new DefaultFont(getFont("raleway.ttf").deriveFont(30f));
+    public static DefaultFont ralewaySmall = new DefaultFont(getFont("raleway.ttf").deriveFont(24f));
+    public static DefaultFont ralewaySmallest = new DefaultFont(getFont("raleway.ttf").deriveFont(16f));
+    public static MinecraftFont mcFont = new MinecraftFont(getFont("raleway.ttf").deriveFont(24f));
     public static Font getFont(String name) {
         Font font = null;
         try {

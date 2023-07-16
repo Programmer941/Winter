@@ -32,7 +32,8 @@ public class MainMenu extends WinterGuiScreen {
         e.goTo(100, 15f);
         int y = 10;
         for (int i = 0; i < Winter.instance.accountManager.accountList.size(); i++) {
-            addElement(new AccountButton(Winter.instance.accountManager.accountList.get(i), 10, y));
+            System.out.println(Winter.instance.accountManager.accountList.get(i).name);
+//            addElement(new AccountButton(Winter.instance.accountManager.accountList.get(i), 10, y));
             y += 70;
         }
         addElement(new MenuButton("Options", width / 2 - 100, height - 60 - 10, 200, 60) {
